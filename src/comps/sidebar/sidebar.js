@@ -3,8 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { IoMdCar } from "react-icons/io";
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
 import { FcAutomotive } from "react-icons/fc";
-import { links } from "../data/myData";
-import { useStateContext } from "../contexts/contextProvider.js";
+import { links } from "../../data/myData";
+import { useStateContext } from "../../contexts/contextProvider.js";
 
 const Sidebar = () => {
   const { openSidebar, currentColor, setOpenSidebar, screenSize } =
@@ -48,7 +48,7 @@ const Sidebar = () => {
                 type="button"
                 onClick={() => setOpenSidebar(!openSidebar)}
                 className="text-xl rounded-full md:p-3 text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray md:mt-4 block md-hidden"
-                style={{transition: "0.3s"}}
+                style={{ transition: "0.3s" }}
               >
                 <MdOutlineNavigateNext />
               </button>
@@ -79,7 +79,8 @@ const Sidebar = () => {
                         key={link.name}
                         link={link}
                         onClick={closeSideBar}
-                        style={({ isActive }) => ({zIndex: '999999',
+                        style={({ isActive }) => ({
+                          zIndex: "999999",
                           backgroundColor: isActive ? currentColor : "",
                         })}
                         className={({ isActive }) =>
@@ -87,7 +88,11 @@ const Sidebar = () => {
                         }
                       >
                         {link.icon}
-                        {openSidebar && <span className="" style={{}}>{link.hebrew}</span>}
+                        {openSidebar && (
+                          <span className="" style={{}}>
+                            {link.hebrew}
+                          </span>
+                        )}
                       </NavLink>
                     );
                   })}
