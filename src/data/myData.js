@@ -14,7 +14,7 @@ import { GrLocation } from 'react-icons/gr';
 
 
 
-
+// Menu data
 export const links = [
   {
     title: 'דשבורד',
@@ -78,35 +78,6 @@ export const links = [
         hebrew: 'הרשאות',
         icon: <RiAdminLine />,
       },
-      // {
-      //   name: 'area',
-      //   icon: <AiOutlineAreaChart />,
-      // },
-
-      // {
-      //   name: 'bar',
-      //   icon: <AiOutlineBarChart />,
-      // },
-      // {
-      //   name: 'pie',
-      //   icon: <FiPieChart />,
-      // },
-      // {
-      //   name: 'financial',
-      //   icon: <RiStockLine />,
-      // },
-      // {
-      //   name: 'color-mapping',
-      //   icon: <BsBarChart />,
-      // },
-      // {
-      //   name: 'pyramid',
-      //   icon: <GiLouvrePyramid />,
-      // },
-      // {
-      //   name: 'stacked',
-      //   icon: <AiOutlineBarChart />,
-      // },
     ],
   },
   {
@@ -122,11 +93,93 @@ export const links = [
 ];
 
 
+// Cars data
+export const cars = [
+  {
+    id: 1,
+    licenseNumber: "85-510-85",
+    manufacturer: "OPEL",
+    model: "ASTRA",
+    year: 2017,
+  },
+  {
+    id: 2,
+    licenseNumber: "361-89-202",
+    manufacturer: "MITSUBISHI",
+    model: "ATTRAGE",
+    year: 2021,
+  },
+  {
+    id: 3,
+    licenseNumber: "519-27-002",
+    manufacturer: "CHEVROLET",
+    model: "SPARK",
+    year: 2022,
+  },
+  {
+    id: 4,
+    licenseNumber: "69-525-34",
+    manufacturer: "CITROEN",
+    model: "BERLINGO",
+    year: 2016,
+  },
+  {
+    id: 5,
+    licenseNumber: "614-17-301",
+    manufacturer: "FORD",
+    model: "FOCUS",
+    year: 2021,
+  },
+  {
+    id: 6,
+    licenseNumber: "392-88-002",
+    manufacturer: "HYUNDAI",
+    model: "AIONIQ",
+    year: 2021,
+  },
+  {
+    id: 7,
+    licenseNumber: "780-50-701",
+    manufacturer: "HYUNDAI",
+    model: "ACCENT",
+    year: 2020,
+  },
+  {
+    id: 8,
+    licenseNumber: "741-01-402",
+    manufacturer: "KIA",
+    model: "CEED",
+    year: 2021,
+  },
+  {
+    id: 9,
+    licenseNumber: "246-15-503",
+    manufacturer: "MAZDA",
+    model: "2",
+    year: 2022,
+  },
+  {
+    id: 10,
+    licenseNumber: "202-24-701",
+    manufacturer: "NISSAN",
+    model: "SENTRA",
+    year: 2018,
+  },
+  {
+    id: 11,
+    licenseNumber: "807-24-401",
+    manufacturer: "TOYOTA",
+    model: "COROLA",
+    year: 2021,
+  },
+];
 
+
+// Colors data
 export const themeColors = [
   {
     name: 'Primary',
-    color: '#42a5f5',
+    color: '#727cf5',
   },
   {
     name: 'Secondary',
