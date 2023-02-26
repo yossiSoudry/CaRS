@@ -4,7 +4,7 @@ import { GoPrimitiveDot } from 'react-icons/go';
 import { IoIosMore } from 'react-icons/io';
 import { DropDownListComponent } from '@syncfusion/ej2-react-dropdowns';
 
-import Stacked from '../comps/charts/stacked';
+// import Stacked from '../comps/charts/stacked';
 import Button from '../comps/buttons/button';
 import { earningData, medicalproBranding, recentTransactions, weeklyStats, dropdownData, SparklineAreaData, ecomPieChartData } from '../data/dummy';
 import { useStateContext } from '../contexts/contextProvider';
@@ -116,7 +116,7 @@ const Ecommerce = () => {
               </div>
             </div>
             <div>
-              <Stacked currentMode={currentMode} width="320px" height="360px" />
+              {/* <Stacked currentMode={currentMode} width="320px" height="360px" /> */}
             </div>
           </div>
         </div>
