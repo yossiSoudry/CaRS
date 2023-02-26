@@ -1,12 +1,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Permissions from '../pages/permissions'
-import Calendar from '../pages/calendar'
-import Settings from '../pages/settings'
-import Customers from '../pages/customers'
-import ECommerce from '../pages/eCommerce'
-import Orders from '../pages/orders'
-import Cars from '../pages/cars'
+import Permissions from "../pages/permissions";
+import Calendar from "../pages/calendar";
+import Settings from "../pages/settings";
+import Customers from "../pages/customers";
+import ECommerce from "../pages/eCommerce";
+import Orders from "../pages/orders";
+import Cars from "../pages/cars/cars";
+import AddCar from "../pages/cars/addCar";
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/permissions" element={<Permissions />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/cars/addCar" element={<AddCar />} />
       </Routes>
     </div>
   );

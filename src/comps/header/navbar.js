@@ -36,12 +36,12 @@ const Navbar = () => {
   const handleOpenSidebar = () => setOpenSidebar(!openSidebar);
 
   return (
-    <div className="flex md:justify-end sm:justify-between p-2 md:ml-6 md:mr-6">
+    <div className="flex md:justify-end mt-3 sm:justify-between p-2 md:ml-6 md:mr-6">
       {/* The burger icon */}
       {screenSize <= 768 && (
         <button
           style={{ color: currentColor }}
-          className="relative text-xl rounded-full p-3 hover:bg-light-gray"
+          className="relative text-2xl flex items-center shadow-sm gap-4 cursor-pointer p-2 bg-white dark:bg-secondary-dark-bg hover:bg-slate-200 dark:hover:bg-slate-300 rounded-lg ml-4"
           onClick={handleOpenSidebar}
         >
           <AiOutlineMenu />
@@ -53,7 +53,7 @@ const Navbar = () => {
       {/* End of buttons area */}
 
       {/* Placeholder */}
-      <div className="xl:w-1/4 md:w-1/3"></div>
+      {/* <div className="xl:w-1/4 md:w-1/3"></div> */}
     </div>
   );
 };

@@ -11,6 +11,8 @@ const Button = ({
   text,
   borderRadius,
   width,
+  margin,
+  classN,
 }) => {
   const { setIsClicked, initialState } = useStateContext();
 
@@ -19,7 +21,7 @@ const Button = ({
       type="button"
       onClick={() => setIsClicked(initialState)}
       style={{ backgroundColor: bgColor, color, borderRadius }}
-      className={` text-${size} p-3 w-${width} hover:drop-shadow-xl hover:bg-${bgHoverColor}`}
+      className={` text-${size} p-3 w-${width} hover:drop-shadow-xl hover:bg-${bgHoverColor} m${margin} ${classN}`}
     >
       {icon} {text}
     </button>

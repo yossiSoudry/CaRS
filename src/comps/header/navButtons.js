@@ -1,5 +1,5 @@
 import { BsChatLeft } from "react-icons/bs";
-import { RiNotification3Line } from "react-icons/ri";
+
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import elazar from "../../data/images/try/elazar.png";
@@ -8,6 +8,7 @@ import Notification from "./notification";
 import Chat from "./chat";
 import { BsFullscreen } from "react-icons/bs";
 import { useStateContext } from "../../contexts/contextProvider";
+import Notification2 from "./notification2";
 
 // Component creator the buttons fof the navbar
 const NavButton = ({ title, customFunc, icon, dotColor }) => {
@@ -18,11 +19,11 @@ const NavButton = ({ title, customFunc, icon, dotColor }) => {
         type="button"
         onClick={customFunc}
         style={{ color: currentColor }}
-        className="relative text-xl rounded-full p-3 hover:bg-light-gray"
+        className="relative text-2xl flex items-center shadow-sm gap-4 cursor-pointer p-2 bg-white dark:bg-secondary-dark-bg hover:bg-slate-200 dark:hover:bg-slate-300 rounded-lg"
       >
         <span
           style={{ background: dotColor }}
-          className="absolute inline-flex rounded-full h-2 w-2 left-2 top-2"
+          className="absolute animate-ping inline-flex rounded-full h-2 w-2 left-2 top-2"
         />
         {icon}
       </button>
@@ -31,7 +32,7 @@ const NavButton = ({ title, customFunc, icon, dotColor }) => {
 };
 
 const NavButtons = () => {
-  const { handleClick, isClicked, screenSize } = useStateContext();
+  const { handleClick, isClicked, screenSize, currentColor } = useStateContext();
 
   function toggleFullscreen() {
     if (document.fullscreenElement) {
@@ -43,7 +44,7 @@ const NavButtons = () => {
 
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex justify-between gap-4">
         {screenSize >= 768 && (
           <NavButton
             title="מסך מלא"
@@ -52,28 +53,29 @@ const NavButtons = () => {
           />
         )}
 
-        <NavButton
+        {/* <NavButton
           title="צ'אט"
           dotColor="#03C9D7"
           customFunc={() => handleClick("chat")}
           icon={<BsChatLeft />}
-        />
+        /> */}
 
         <NavButton
           title="התראות"
-          dotColor="#03C9D7"
+          dotColor="#fd0061"
           customFunc={() => handleClick("notification")}
-          icon={<RiNotification3Line />}
+          icon={<Notification2 />}
         />
 
         <TooltipComponent content="משתמש" position="BottomCenter">
           <div
-            className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
+            className="flex items-center gap-4 shadow-sm cursor-pointer p-1 bg-white dark:hover:bg-slate-300 dark:bg-secondary-dark-bg hover:bg-slate-200 rounded-lg"
             onClick={() => handleClick("userProfile")}
+            style={{color: currentColor}}
           >
-            <MdKeyboardArrowDown className="text-gray-400 text-14" />
+            <MdKeyboardArrowDown className=" text-14" />
             <p>
-              <span className="text-gray-400 font-bold ml-1 text-14">
+              <span className=" font-bold ml-1 text-14">
                 אלעזר
               </span>
             </p>
@@ -86,8 +88,8 @@ const NavButtons = () => {
         </TooltipComponent>
 
         {/* Actives the requested area according to the button pressed */}
-        {isClicked.chat && <Chat />}
-        {isClicked.notification && <Notification />}
+        {/* {isClicked.chat && <Chat />} */}
+        {/* {isClicked.notification && <Notification2 />} */}
         {isClicked.userProfile && <UserProfile />}
       </div>
     </div>
