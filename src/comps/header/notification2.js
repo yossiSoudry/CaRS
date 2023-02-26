@@ -1,11 +1,11 @@
 import React from 'react';
+import { RiNotification3Line } from "react-icons/ri";
 
 import {
   NovuProvider,
   PopoverNotificationCenter,
   NotificationBell,
 } from '@novu/notification-center';
-import { useStateContext } from '../contexts/contextProvider';
 
 function Header() {
   function onNotificationClick(message: IMessage) {
@@ -18,16 +18,16 @@ function Header() {
   const currentMode = localStorage.getItem("themeMode");
 
   return (
-    <NovuProvider subscriberId={'USER_ID'} applicationIdentifier={'APP_ID_FROM_ADMIN_PANEL'} i18n="he">
-      <PopoverNotificationCenter onNotificationClick={onNotificationClick} colorScheme={currentMode}>
-        {({ unseenCount }) => <NotificationBell unseenCount={unseenCount} />}
+    <NovuProvider subscriberId={'63ed28cb777af8e017b4cd49'} applicationIdentifier={'I143FiGkYoDk'} i18n="he" >
+      <PopoverNotificationCenter onNotificationClick={onNotificationClick} colorScheme={currentMode} position="bottom">
+        {({ unseenCount }) => <RiNotification3Line unseenCount={unseenCount} />}
       </PopoverNotificationCenter>
     </NovuProvider>
   );
 }
 
 
-const Orders = () => {
+const Notification2 = () => {
   return (
     <div>
       <Header />
@@ -35,4 +35,4 @@ const Orders = () => {
   )
 }
 
-export default Orders
+export default Notification2

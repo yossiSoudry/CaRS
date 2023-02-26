@@ -4,10 +4,9 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 const StateContext = createContext();
 
 const initialState = {
-  chat: false,
-  cart: false,
   userProfile: false,
   notification: false,
+  addCar:false,
 };
 
 export const ContextProvider = ({ children }) => {
