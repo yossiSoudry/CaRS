@@ -31,7 +31,7 @@ const Sidebar = () => {
         <Link
           to="/"
           onClick=""
-          className="items-center gap-3 mx-auto mt-4 flex text-xl hover:scale-125 delay-50 duration-500 font-extrabold tracking-tight dark:text-white text-slate-900 w-1/3"
+          className="items-center gap-3 mx-auto mt-4 flex text-xl hover:scale-125 delay-75 duration-500 font-extrabold tracking-tight dark:text-white text-slate-900 w-1/3"
         >
           {openSidebar && <FcAutomotive />}
           {openSidebar && (
@@ -77,7 +77,6 @@ const Sidebar = () => {
                   <NavLink
                     to={`/${link.name}`}
                     key={link.name}
-                    link={link}
                     onClick={closeSideBar}
                     style={({ isActive }) => ({
                       zIndex: "999999",

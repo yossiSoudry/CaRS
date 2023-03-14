@@ -65,25 +65,25 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+// function TabPanel(props) {
+//   const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`simple-tabpanel-${index}`}
+//       aria-labelledby={`simple-tab-${index}`}
+//       {...other}
+//     >
+//       {value === index && (
+//         <Box sx={{ p: 3 }}>
+//           <Typography>{children}</Typography>
+//         </Box>
+//       )}
+//     </div>
+//   );
+// }
 
 // TabPanel.propTypes = {
 //   children: PropTypes.node,
@@ -91,19 +91,19 @@ function TabPanel(props) {
 //   value: PropTypes.number.isRequired,
 // };
 
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
+// function a11yProps(index) {
+//   return {
+//     id: `simple-tab-${index}`,
+//     "aria-controls": `simple-tabpanel-${index}`,
+//   };
+// }
 
 export default function Settings() {
-  const [value, setValue] = React.useState(0);
+  // const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
 
   // const [alignment, setAlignment] = React.useState("left");
 
@@ -120,7 +120,7 @@ export default function Settings() {
   } = useStateContext();
 
   return (
-    <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl dark:bg-secondary-dark-bg dark:text-gray-200">
+    <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl dark:bg-secondary dark:text-gray-200">
       <Box sx={{}} className="" style={{ zIndex: 0 }}>
         {/* <Box sx={{ borderBottom: 1, borderColor: "divider" }}> */}
           {/* <Tabs
@@ -159,7 +159,7 @@ export default function Settings() {
                             <MaterialUISwitch
                               // sx={{ m: 1 }}
 
-                              // defaultChecked
+                              defaultChecked={currentMode === "dark" ? true : false}
                               onChange={setMode}
                               value={currentMode === "light" ? "dark" : "light"}
                             />

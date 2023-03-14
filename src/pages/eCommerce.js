@@ -22,7 +22,7 @@ const Ecommerce = () => {
   return (
     <div className="">
       <div className="flex flex-wrap lg:flex-nowrap justify-center ">
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
+        <div className="bg-white dark:text-gray-200 dark:bg-secondary h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center">
           <div className="flex justify-between items-center">
             <div>
               <p className="font-bold text-gray-400">Earnings</p>
@@ -47,7 +47,7 @@ const Ecommerce = () => {
         </div>
         <div className="flex m-3 flex-wrap justify-center gap-1 items-center">
           {earningData.map((item) => (
-            <div key={item.title} className="bg-white h-44 dark:text-gray-200 dark:bg-secondary-dark-bg md:w-56  p-4 pt-9 rounded-2xl ">
+            <div key={item.title} className="bg-white h-44 dark:text-gray-200 dark:bg-secondary md:w-56  p-4 pt-9 rounded-2xl ">
               <button
                 type="button"
                 style={{ color: item.iconColor, backgroundColor: item.iconBg }}
@@ -68,7 +68,7 @@ const Ecommerce = () => {
       </div>
 
       <div className="flex gap-10 flex-wrap justify-center">
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl md:w-780  ">
+        <div className="bg-white dark:text-gray-200 dark:bg-secondary m-3 p-4 rounded-2xl md:w-780  ">
           <div className="flex justify-between">
             <p className="font-semibold text-xl">Revenue Updates</p>
             <div className="flex items-center gap-4">
@@ -139,7 +139,7 @@ const Ecommerce = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl md:w-400 p-8 m-3 flex justify-center items-center gap-10">
+          <div className="bg-white dark:text-gray-200 dark:bg-secondary rounded-2xl md:w-400 p-8 m-3 flex justify-center items-center gap-10">
             <div>
               <p className="text-2xl font-semibold ">$43,246</p>
               <p className="text-gray-400">Yearly sales</p>
@@ -153,7 +153,7 @@ const Ecommerce = () => {
       </div>
 
       <div className="flex gap-10 m-4 flex-wrap justify-center">
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl">
+        <div className="bg-white dark:text-gray-200 dark:bg-secondary p-6 rounded-2xl">
           <div className="flex justify-between items-center gap-2">
             <p className="text-xl font-semibold">Recent Transactions</p>
             <DropDown currentMode={currentMode} />
@@ -194,7 +194,7 @@ const Ecommerce = () => {
             <p className="text-gray-400 text-sm">36 Recent Transactions</p>
           </div>
         </div>
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
+        <div className="bg-white dark:text-gray-200 dark:bg-secondary p-6 rounded-2xl w-96 md:w-760">
           <div className="flex justify-between items-center gap-2 mb-10">
             <p className="text-xl font-semibold">Sales Overview</p>
             <DropDown currentMode={currentMode} />
@@ -206,7 +206,7 @@ const Ecommerce = () => {
       </div>
 
       <div className="flex flex-wrap justify-center">
-        <div className="md:w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
+        <div className="md:w-400 bg-white dark:text-gray-200 dark:bg-secondary rounded-2xl p-6 m-3">
           <div className="flex justify-between">
             <p className="text-xl font-semibold">Weekly Stats</p>
             <button type="button" className="text-xl font-semibold text-gray-500">
@@ -240,7 +240,7 @@ const Ecommerce = () => {
           </div>
 
         </div>
-        <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
+        <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary rounded-2xl p-6 m-3">
           <div className="flex justify-between">
             <p className="text-xl font-semibold">MedicalPro Branding</p>
             <button type="button" className="text-xl font-semibold text-gray-400">
@@ -295,7 +295,7 @@ const Ecommerce = () => {
             <p className="text-gray-400 text-sm">36 Recent Transactions</p>
           </div>
         </div>
-        <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary-dark-bg rounded-2xl p-6 m-3">
+        <div className="w-400 bg-white dark:text-gray-200 dark:bg-secondary rounded-2xl p-6 m-3">
           <div className="flex justify-between">
             <p className="text-xl font-semibold">Daily Activities</p>
             <button type="button" className="text-xl font-semibold text-gray-500">

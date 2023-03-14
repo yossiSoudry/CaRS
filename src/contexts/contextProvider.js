@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 
 const StateContext = createContext();
@@ -17,7 +17,7 @@ export const ContextProvider = ({ children }) => {
   // Holds the current mode - dark ol light.
   const [currentMode, setCurrentMode] = useState(localStorage.themeMode);
 
-  const [currentLanguage, setCurrentLanguage] = useState("Heblew");
+  const [currentLanguage, setCurrentLanguage] = useState("Hebrew");
   // Holds the sidebar Status - open or close.
   const [openSidebar, setOpenSidebar] = useState(true);
 
@@ -25,12 +25,32 @@ export const ContextProvider = ({ children }) => {
 
   const theme = createTheme();
 
+  // Gets the event of resizing the screen width and handle it.
+  useEffect(() => {
+    // פונקציית שאילתא המעדכנת את סקרינסייז בהתאם לרוחב המסך הנוכחי
+    const updateSize = () => setScreenSize(window.innerWidth);
+    // האזנה לאירוע שינוי רוחב המסך וקריאה לשאילתא
+    window.addEventListener("resize", updateSize);
+    // (did mount)קריאה לפונקציית השאילתא בעת אתחול
+    updateSize();
+    // מבטל האזנה לאירוע
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  // Sets the menu state according to the screen width.
+  useEffect(() => {
+    if (screenSize <= 1080) {
+      setOpenSidebar(false);
+    } else {
+      setOpenSidebar(true);
+    }
+  }, [screenSize]);
+  
+
   const setMode = (e) => {
-    // console.log(e.target.value);
     setCurrentMode(e.target.value);
     theme.palette.mode = e.target.value;
     localStorage.setItem("themeMode", e.target.value);
-    // localStorage.setItem("theme.palette.mode", e.target.value);
   };
 
   const setColor = (color) => {
@@ -38,8 +58,7 @@ export const ContextProvider = ({ children }) => {
     localStorage.setItem("colorMode", color);
   };
 
-  const handleClick = (clicked) =>
-    setIsClicked({ ...initialState, [clicked]: true });
+  const handleClick = (clicked) => setIsClicked({ ...initialState, [clicked]: true });
 
   return (
     <StateContext.Provider

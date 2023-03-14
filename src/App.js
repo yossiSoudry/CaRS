@@ -28,34 +28,31 @@ const App = (props) => {
   return (
     <div className={currentMode === "dark" ? "dark" : "light"}>
       <BrowserRouter>
-        <div className="flex dark:bg-main-dark-bg  relative">
+        <div className="flex">
           {openSidebar ? (
             <div
-              className="w-64 fixed shadow-sm bg-white dark:bg-secondary-dark-bg delay-50 duration-500"
-              // style={{ transition: "0.25s" }}
+              className="w-64 fixed shadow-sm bg-white dark:bg-secondary delay-50 duration-500"
             >
               <Sidebar />
             </div>
           ) : (
             <div
-              className="w-0 md:w-16 fixed shadow-sm bg-white dark:bg-secondary-dark-bg delay-50 duration-500"
-              // style={{ transition: "0.25s" }}
+              className="w-0 md:w-16 fixed shadow-sm bg-white dark:bg-secondary delay-50 duration-500"
             >
               <Sidebar />
             </div>
           )}
           <div
-            className={`dark:bg-main-dark-bg bg-slate-100 min-h-screen w-full delay-50 duration-500 ${
+            className={`dark:bg-dark bg-slate-100 min-h-screen w-full delay-50 duration-500 ${
               openSidebar ? "md:mr-64" : "md:mr-16 flex-2"
             }`}
-            // style={{ transition: "0.25s" }}
           >
             {/* <HideOnScroll {...props}> */}
-              <div className="fixed md:static bg-slate-100 dark:bg-main-dark-bg navbar h-20 w-full">
+              <div className="fixed md:static bg-slate-100 dark:bg-dark navbar h-20 w-full">
                 <Navbar className=" " />
               </div>
             {/* </HideOnScroll> */}
-            <div className="mt-20 md:mt-0 m-2 md:m-5 p-2 md:p-10 shadow-sm bg-white rounded-3xl dark:bg-secondary-dark-bg dark:text-gray-200">
+            <div className="mt-20 md:mt-0 m-2 md:m-5 p-2 md:p-10 shadow-sm bg-white rounded-3xl dark:bg-secondary dark:text-gray-200">
               <AppRoutes />
             </div>
           </div>

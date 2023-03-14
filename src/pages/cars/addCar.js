@@ -1,153 +1,158 @@
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import React, { useState, useRef, useEffect } from "react";
 import { useStateContext } from "../../contexts/contextProvider";
-import FormControl from "@mui/material/FormControl";
-import InputAdornment from "@mui/material/InputAdornment";
-import OutlinedInput from "@mui/material/OutlinedInput";
+import Button from "../../comps/buttons/button";
+import { AiOutlineCloudDownload } from "react-icons/ai";
+import { formInputsCar } from "../../data/myData";
+import axios from 'axios';
+
+const FormInput = (props) => {
+  const { label, onChange, id, ...inputProps } = props;
+
+  
+  return (
+    <div className="formInput flex flex-col">
+      <label className="pr-4 text-zinc-600 dark:text-zinc-400">{label}</label>
+      <input
+        {...inputProps}
+        onChange={onChange}
+        className="w-60 p-4 mx-3 mt-1 rounded dark:bg-dark border-1 border-color text-zinc-600 dark:text-zinc-400"
+      ></input>
+    </div>
+  );
+};
 
 const AddCar = () => {
-  const currentMode = localStorage.getItem("themeMode");
-  const theme = createTheme({
-    palette: {
-      mode: currentMode === "dark" ? "dark" : "light",
-    },
+  const [values, setValues] = useState({
+    license_number: "",
+    manufacturer_en: "",
+    manufacturer_hb: "",
+    model_en: "",
+    model_hb: "",
+    year: "",
+    color: "",
+    finish_level: "",
+    km: "",
+    status: "",
+    branch: "",
+    fuel_type: "",
+    exp_test: "",
+    exp_ins: "",
+    last_treatment: "",
+    km_next_treatment: "",
+    nextTreatmentDate: "",
+    class: "",
+    deductible: "",
+    coder: "",
+    added_by: "",
+    date_join: "",
+    img_manufacturer: "",
   });
+
+  
+
   const { currentColor } = useStateContext();
+
+  const updateValue = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
+  const [flag,setFlag] = useState(0);
+
+  useEffect(() => {
+    if (flag === 0){
+    }
+    else{
+    if(values.license_number.length >= 7){
+     doApi(values.license_number)
+    } else {
+      alert("יש להזין מס' רישוי תקין"); 
+   }
+  }
+  },[flag])
+
+    
+  
+
+
+   const doApi = async (numLicense) => {
+    try {
+      let url = "https://data.gov.il/api/3/action/datastore_search?resource_id=053cea08-09bc-40ec-8f7a-156f0677aff3&q=" +
+      numLicense;
+      let resp = await axios.get(url);
+      let car = resp.data.result.records[0];
+      // console.log(car);
+      autoFill(car);
+    }
+    catch (err) {
+      console.log(err);
+
+    }
+    
+  };
+
+   const autoFill = (_carObj) => {
+     values.manufacturer_hb = _carObj.tozeret_nm;
+     values.model_en = _carObj.kinuy_mishari;
+     values.color = _carObj.tzeva_rechev;
+     values.finish_level = _carObj.ramat_gimur;
+     values.fuel_type = _carObj.sug_delek_nm;
+     values.year = _carObj.shnat_yitzur;
+     values.exp_test = _carObj.tokef_dt;
+
+   };
+
+  // console.log(values);
+
   return (
-    <div>
-      <ThemeProvider theme={theme}>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            "& > :not(style)": { m: 1 },
-          }}
-        >
-          <div class="block p-6 rounded-lg shadow-lg">
-            <form>
-              <div class="grid grid-cols-4 gap-4">
-                <div class="form-group mb-6">
-                  <input
-                    type="text"
-                    class="
-                    form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    id="exampleInput123"
-                    aria-describedby="emailHelp123"
-                    placeholder="First name"
-                  />
-                </div>
-                <div class="form-group mb-6">
-                  <input
-                    type="text"
-                    class="
-                    form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    id="exampleInput124"
-                    aria-describedby="emailHelp124"
-                    placeholder="Last name"
-                  />
-                </div>
-              </div>
-              <div class="form-group mb-6">
-                <input
-                  type="email"
-                  class="
-                  form-control block
-                  w-full
-                  px-3
-                  py-1.5
-                  text-base
-                  font-normal
-                  text-gray-700
-                  bg-white bg-clip-padding
-                  border border-solid border-gray-300
-                  rounded
-                  transition
-                  ease-in-out
-                  m-0
-                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="exampleInput125"
-                  placeholder="Email address"
-                />
-              </div>
-              <div class="form-group mb-6">
-                <input
-                  type="password"
-                  class="
-                  form-control block
-                  w-full
-                  px-3
-                  py-1.5
-                  text-base
-                  font-normal
-                  text-gray-700
-                  bg-white bg-clip-padding
-                  border border-solid border-gray-300
-                  rounded
-                  transition
-                  ease-in-out
-                  m-0
-                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                  id="exampleInput126"
-                  placeholder="Password"
-                />
-              </div>
-              <div class="form-group form-check text-center mb-6">
-              </div>
-              <button
-                type="submit"
-                class="
-                w-full
-                px-6
-                py-2.5
-                bg-blue-600
-                text-white
-                font-medium
-                text-xs
-                leading-tight
-                uppercase
-                rounded
-                shadow-md
-                hover:bg-blue-700 hover:shadow-lg
-                focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-                active:bg-blue-800 active:shadow-lg
-                transition
-                duration-150
-                ease-in-out"
-              >
-                Sign up
-              </button>
-            </form>
+    <div className="flex-col">
+      <div className="flex items-center justify-center">
+        <div className="flex-col">
+          <h2 className="text-4xl text-center text-zinc-600 dark:text-zinc-400">
+            הוספת רכב
+          </h2>
+          <div className="flex pb-2">
+            <FormInput
+              name="license_number"
+              placeholder="מס' רישוי"
+              onChange={updateValue}
+              // value={values.license_number}
+            />
+            {/* { <button onClick={() => setGetData(getData+1)}>do</button> } */}
+            <Button
+              color="white"
+              bgColor={currentColor}
+              borderRadius="10px"
+              margin="-1"
+              size="3xl"
+              icon={<AiOutlineCloudDownload />}
+              classN="my-0.5"
+              onClick={() => setFlag(flag+1)}
+            />
           </div>
-        </Box>
-      </ThemeProvider>
+        </div>
+      </div>
+      <form className="flex items-center justify-center flex-wrap p-4 border-y-1 border-color m-4">
+        {formInputsCar.map((input) => (
+          <FormInput
+            key={input.id}
+            {...input}
+            value={values[input.name]}
+            onChange={updateValue}
+          />
+        ))}
+      </form>
+      <div className="flex items-center justify-end pl-28">
+        <Button
+          color="white"
+          bgColor={currentColor}
+          borderRadius="6px"
+          margin="r-auto"
+          size="2xl"
+          width="20"
+          text="שמור"
+          
+        />
+      </div>
     </div>
   );
 };

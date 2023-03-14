@@ -285,26 +285,26 @@ export const carsRow = [
 // Cars column data
 export const carsColumn = [
   { field: "licenseNumber", headerName: "מס' רישוי", width: 120 },
-  {
-    width: 68,
-    editable: false,
-    sortable: false,
-    filterable: false,
-    renderCell: item => 
-      // <Avatar
-      // // key={item.row.manufacturer}
-      // src={require(`../data/images/cars/${item.row.manufacturer.toLowerCase()}.png`)}
-      // sx={{ width: 32, height: 28 }}
-      // />
-      <img
-              className="rounded-full h-10 w-12 hover:scale-125 delay-50 duration-500"
-              src={require(`../data/images/cars/${item.row.manufacturer.toLowerCase()}.png`)}
-              alt={item.row.manufacturer}
-              key={item.row.id}
-              item={item}
-            />
+  // {
+  //   width: 68,
+  //   editable: false,
+  //   sortable: false,
+  //   filterable: false,
+  //   renderCell: item => 
+  //     // <Avatar
+  //     // // key={item.row.manufacturer}
+  //     // src={require(`../data/images/cars/${item.row.manufacturer.toLowerCase()}.png`)}
+  //     // sx={{ width: 32, height: 28 }}
+  //     // />
+  //     <img
+  //             className="rounded-full h-10 w-12 hover:scale-125 delay-50 duration-500"
+  //             src={require(`../data/images/cars/${item.row.manufacturer.toLowerCase()}.png`)}
+  //             alt={item.row.manufacturer}
+  //             key={item.row.id}
+  //             item={item}
+  //           />
       
-    },
+  //   },
     {
       field: "fullName",
       headerName: "דגם יצרן",
@@ -374,14 +374,6 @@ export const carsColumn = [
 // Colors data
 export const themeColors = [
   {
-    name: 'Primary',
-    color: '#727cf5',
-  },
-  {
-    name: 'Secondary',
-    color: '#ba68c8',
-  },
-  {
     name: 'Error',
     color: '#ef5350',
   },
@@ -390,14 +382,23 @@ export const themeColors = [
     color: '#ff9800',
   },
   {
-    name: 'Info',
-    color: '#03a9f4',
-  },
-  {
     name: 'Success',
     color: '#4caf50',
   },
+  {
+    name: 'Secondary',
+    color: '#ba68c8',
+  },
+  {
+    name: 'Primary',
+    color: '#727cf5',
+  },
+  {
+    name: 'Info',
+    color: '#03a9f4',
+  },
 ];
+
 
 // User profile
 export const userProfileData = [
@@ -424,6 +425,8 @@ export const userProfileData = [
   },
 ];
 
+
+// chat data
 export const chatData = [
   {
     image:
@@ -453,4 +456,185 @@ export const chatData = [
     desc: 'לעדכן מחירונים בהקדם',
     time: '18:12',
   },
+];
+
+
+// form inputs for car adding
+export const formInputsCar = [
+    {
+      id: 1,
+      name: "manufacturer_en",
+      type: "text",
+      // placeholder: "יצרן",
+      label: "manufacturer",
+      tag: "input",
+    },
+    {
+      id: 20,
+      name: "manufacturer_hb",
+      type: "text",
+      // placeholder: "יצרן",
+      label: "יצרן",
+      tag: "input",
+    },
+    {
+      id: 2,
+      name: "model_en",
+      type: "text",
+      // placeholder: "דגם",
+      label: "model",
+      tag: "input",
+    },
+    {
+      id: 21,
+      name: "model_hb",
+      type: "text",
+      // placeholder: "דגם",
+      label: "דגם",
+      tag: "input",
+    },
+    {
+      id: 3,
+      name: "year",
+      type: "text",
+      // placeholder: "שנתון",
+      label: "שנתון",
+      tag: "input",
+    },
+    {
+      id: 4,
+      name: "color",
+      type: "text",
+      // placeholder: "צבע",
+      label: "צבע",
+      tag: "input",
+    },
+    {
+      id: 5,
+      name: "finish_level",
+      type: "text",
+      // placeholder: "רמת גימור",
+      label: "רמת גימור",
+      tag: "input",
+    },
+    {
+      id: 6,
+      name: "km",
+      type: "number",
+      // placeholder: "ק''מ",
+      label: "ק''מ",
+      tag: "input",
+    },
+    {
+      id: 7,
+      name: "status",
+      type: "text",
+      // placeholder: "סטטוס",
+      label: "סטטוס",
+      tag: "input",
+    },
+    {
+      id: 8,
+      name: "branch",
+      type: "text",
+      // placeholder: "סניף",
+      label: "סניף",
+      tag: "input",
+    },
+    {
+      id: 9,
+      name: "fuel_type",
+      type: "text",
+      // placeholder: "סוג דלק",
+      label: "סוג דלק",
+      tag: "input",
+    },
+    {
+      id: 10,
+      name: "exp_test",
+      type: "date",
+      // placeholder: "תוקף טסט",
+      label: "תוקף טסט",
+      tag: "input",
+    },
+    {
+      id: 11,
+      name: "exp_ins",
+      type: "date",
+      // placeholder: "תוקף ביטוח",
+      label: "תוקף ביטוח",
+      tag: "input",
+    },
+    {
+      id: 12,
+      name: "last_treatment",
+      type: "date",
+      // placeholder: "טיפול אחרון",
+      label: "טיפול אחרון",
+      tag: "input",
+    },
+    {
+      id: 13,
+      name: "km_next_treatment",
+      type: "number",
+      // placeholder: "ק''מ טיפול הבא",
+      label: "ק''מ טיפול הבא",
+      tag: "input",
+    },
+    {
+      id: 14,
+      name: "date_next_treatment",
+      type: "date",
+      // placeholder: "תאריך טיפול הבא",
+      label: "תאריך טיפול הבא",
+      tag: "input",
+    },
+    {
+      id: 15,
+      name: "tag",
+      type: "text",
+      // placeholder: "דירוג",
+      label: "דירוג",
+      tag: "input",
+    },
+    {
+      id: 16,
+      name: "deductible",
+      type: "number",
+      // placeholder: "השתתפות עצמית",
+      label: "השתתפות עצמית",
+      tag: "input",
+    },
+    {
+      id: 17,
+      name: "coder",
+      type: "text",
+      // placeholder: "קודנית",
+      label: "קודנית",
+      tag: "input",
+    },
+    {
+      id: 18,
+      name: "added_by",
+      type: "string",
+      // placeholder: "הוקם ע''י",
+      label: "הוקם ע''י",
+      tag: "input",
+    },
+    {
+      id: 19,
+      name: "year",
+      type: "date",
+      // placeholder: "שנתון",
+      label: "שנתון",
+      tag: "input",
+    },
+    {
+      id: 22,
+      name: "date_join",
+      type: "date",
+      // placeholder: "שנתון",
+      label: "הוקם בתאריך",
+      tag: "input",
+    },
 ];

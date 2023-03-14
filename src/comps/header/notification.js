@@ -1,7 +1,6 @@
 import React from "react";
 import { MdOutlineCancel } from "react-icons/md";
 import { TfiClose } from "react-icons/tfi";
-
 import Button from "../buttons/button";
 import { chatData } from "../../data/myData";
 import { useStateContext } from "../../contexts/contextProvider";
