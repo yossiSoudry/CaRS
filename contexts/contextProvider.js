@@ -1,30 +1,32 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 const StateContext = createContext();
 
-const initialState = {
+const initialModals = {
   userProfile: false,
   notification: false,
-  addCar:false,
 };
 
 export const ContextProvider = ({ children }) => {
-  // Holds the current screen size.
+  // Holds and sets the current screen size.
   const [screenSize, setScreenSize] = useState(undefined);
-  // Holds the current color.
-  const [currentColor, setCurrentColor] = useState(localStorage.colorMode);
-  // Holds the current mode - dark ol light.
+  // Holds and sets the current color.
+  const [currentColor, setCurrentColor] = useState(localStorage.colorMode || '#727cf5');
+  // Holds and sets the current mode - dark ol light.
   const [currentMode, setCurrentMode] = useState(localStorage.themeMode);
-
+  // Holds and sets the current language.
   const [currentLanguage, setCurrentLanguage] = useState("Hebrew");
-  // Holds the sidebar Status - open or close.
+  // Holds and sets the sidebar Status - open or close.
   const [openSidebar, setOpenSidebar] = useState(true);
+  // Holds and sets the modals status, open or close.
+  const [isModalOpen, setIsModalOpen] = useState(initialModals);
 
-  const [isClicked, setIsClicked] = useState(initialState);
+  const [user, setUser] = useState(null);
+  // Handle the click on a close button of the modals
+  const handleCloseModal = (clicked) => setIsModalOpen({ ...initialModals, [clicked]: true });
 
-  const theme = createTheme();
-
+  
   // Gets the event of resizing the screen width and handle it.
   useEffect(() => {
     // פונקציית שאילתא המעדכנת את סקרינסייז בהתאם לרוחב המסך הנוכחי
@@ -33,10 +35,10 @@ export const ContextProvider = ({ children }) => {
     window.addEventListener("resize", updateSize);
     // (did mount)קריאה לפונקציית השאילתא בעת אתחול
     updateSize();
-    // מבטל האזנה לאירוע
+    // מבטל האזנה לאירוע בעת סגירת הקומפוננטה
     return () => window.removeEventListener("resize", updateSize);
   }, []);
-
+  
   // Sets the menu state according to the screen width.
   useEffect(() => {
     if (screenSize <= 1080) {
@@ -46,7 +48,8 @@ export const ContextProvider = ({ children }) => {
     }
   }, [screenSize]);
   
-
+  // provides and sets the current mode for MUI
+  const theme = createTheme();
   const setMode = (e) => {
     setCurrentMode(e.target.value);
     theme.palette.mode = e.target.value;
@@ -58,7 +61,6 @@ export const ContextProvider = ({ children }) => {
     localStorage.setItem("colorMode", color);
   };
 
-  const handleClick = (clicked) => setIsClicked({ ...initialState, [clicked]: true });
 
   return (
     <StateContext.Provider
@@ -68,10 +70,10 @@ export const ContextProvider = ({ children }) => {
         openSidebar,
         screenSize,
         setScreenSize,
-        handleClick,
-        isClicked,
-        initialState,
-        setIsClicked,
+        handleCloseModal,
+        isModalOpen,
+        initialModals,
+        setIsModalOpen,
         setOpenSidebar,
         setCurrentColor,
         setCurrentMode,
@@ -79,6 +81,8 @@ export const ContextProvider = ({ children }) => {
         setColor,
         currentLanguage,
         setCurrentLanguage,
+        user,
+        setUser,
       }}
     >
       {children}
