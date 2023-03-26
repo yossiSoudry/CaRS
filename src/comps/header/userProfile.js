@@ -1,17 +1,17 @@
 import React from 'react';
 import { TfiClose } from 'react-icons/tfi';
-
-
+import { MdLogout } from "react-icons/md";
+import DoButton from '../buttons/doButton';
 import Button from '../buttons/button';
 import { userProfileData } from '../../data/myData';
 import { useStateContext } from "../../contexts/contextProvider";
 import elazar from "../../data/images/try/elazar.png";
 
 const UserProfile = () => {
-  const { currentColor } = useStateContext();
+  const { currentColor, user } = useStateContext();
 
   return (
-    <div className="nav-item absolute left-0 sm:left-8  top-16 bg-white dark:bg-[#42464D] p-8 z-20 rounded-lg w-full sm:w-96 shadow-xl" style={{}}>
+    <div className="nav-item absolute left-0 sm:left-8 mx-4 top-16 bg-white dark:bg-[#42464D] p-8 z-20 rounded-lg sm:w-96 shadow-xl" style={{}}>
       <div className="flex justify-between items-center">
         <p className="font-semibold text-lg -translate-x-36"  style={{color: currentColor}}>פרופיל</p>
         <Button
@@ -25,9 +25,9 @@ const UserProfile = () => {
       </div>
       <div className="flex gap-5 items-center mt-6 border-color justify-between border-b-1 px-7 pb-4">
         <div>
-          <p className="font-semibold text-xl dark:text-gray-200"> אלעזר בן חיים </p>
-          <p className="text-gray-500 text-sm dark:text-gray-400">  מנכ''ל  </p>
-          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> elazar@admin.com </p>
+          <p className="font-semibold text-xl dark:text-gray-200">{user.name}</p>
+          <p className="text-gray-500 text-sm dark:text-gray-400"> {user.company_role} </p>
+          <p className="text-gray-500 text-sm font-semibold dark:text-gray-400"> {user.phone_number} </p>
         </div>
         <img
           className="rounded-full h-24 w-24 hover:scale-110 delay-50 duration-500"
@@ -53,14 +53,21 @@ const UserProfile = () => {
           </div>
         ))}
       </div>
-      <div className="mt-5">
-        <Button
+      <div className="mt-5 flex justify-center">
+        <DoButton
           color="white"
           bgColor={currentColor}
-          text="Logout"
+          tooltip="התנתקות"
           borderRadius="10px"
-          width="full"
+          // width="full"
+          size="xl"
+          icon={<MdLogout />}
           classN='transition ease-in-out delay-75 bg-blue-500 hover:scale-110 hover:bg-indigo-500 duration-300'
+          customFunc={() => {
+            localStorage.token = ''
+            window.location.reload()
+            }
+          }
         />
       </div>
     </div>

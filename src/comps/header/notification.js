@@ -1,5 +1,4 @@
 import React from "react";
-import { MdOutlineCancel } from "react-icons/md";
 import { TfiClose } from "react-icons/tfi";
 
 import Button from "../buttons/button";
@@ -16,7 +15,6 @@ const Notification = () => {
           <p className="font-semibold text-lg -translate-x-20" style={{ color: currentColor }}>
             4 התראות שלא טופלו
           </p>
-          {/* <button type="button" className="text-white text-xs rounded p-1 px-2 bg-orange-theme ">חדשות</button> */}
         </div>
         <Button
           classN="-translate-x-7 -translate-y-7"
@@ -54,7 +52,7 @@ const Notification = () => {
             text="הצג את כל ההתראות"
             borderRadius="10px"
             width="full"
-            classN='transition ease-in-out delay-75 bg-blue-500 hover:scale-110 hover:bg-indigo-500 duration-300'
+            classN='transition ease-in-out delay-75 bg-blue-500 hover:scale-110 hover:bg-indigo-500 duration-500'
           />
         </div>
       </div>
