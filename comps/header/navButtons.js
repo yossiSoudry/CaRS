@@ -1,81 +1,64 @@
 import { useState } from "react";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import UserProfile from "./userProfile";
 import Notification from "./notification";
-import Notification2 from "./notification2";
 import { useStateContext } from "../../contexts/contextProvider";
 import elazar from "../../data/images/try/elazar.png";
 import { BsFullscreen } from "react-icons/bs";
 import { RiFullscreenExitFill } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { MdOutlineNotificationsActive } from "react-icons/md";
-
-// Component creator the buttons fof the navbar
-const NavButton = ({ title, customFunc, icon, dotColor }) => {
-  const { currentColor } = useStateContext();
-  return (
-    <TooltipComponent content={title} position="BottomCenter">
-      <button
-        type="button"
-        onClick={customFunc}
-        style={{ color: currentColor }}
-        className="relative text-2xl flex items-center shadow-sm gap-4 cursor-pointer p-2 bg-white dark:bg-secondary hover:bg-slate-200 dark:hover:bg-slate-300 rounded-lg"
-      >
-        <span
-          style={{ background: dotColor }}
-          className="absolute animate-ping inline-flex rounded-full h-2 w-2 left-2 top-2"
-        />
-        {icon}
-      </button>
-    </TooltipComponent>
-  );
-};
+import DoButton from "../buttons/doButton";
 
 const NavButtons = () => {
-  const { handleClick, isClicked, screenSize, currentColor } = useStateContext();
-  const [fullScreen ,setFullScreen] = useState(false)
-
+  const { handleCloseModal, isModalOpen, screenSize, currentColor, user } =
+    useStateContext();
+  const [fullScreen, setFullScreen] = useState(false);
 
   function toggleFullscreen() {
     if (document.fullscreenElement) {
       document.exitFullscreen();
-      setFullScreen(false)
+      setFullScreen(false);
     } else {
       document.documentElement.requestFullscreen();
-      setFullScreen(true)
+      setFullScreen(true);
     }
   }
-
 
   return (
     <div>
       <div className="flex justify-between gap-4">
         {screenSize >= 768 && (
-          <NavButton
-            title={fullScreen?"צא ממסך מלא":"מסך מלא"}
+          <DoButton
+            title={fullScreen ? "צא ממסך מלא" : "מסך מלא"}
+            tooltip={fullScreen ? "צא ממסך מלא" : "מסך מלא"}
+            color={currentColor}
+            size="2xl"
+            classN="bg-white dark:bg-secondary"
             customFunc={toggleFullscreen}
-            icon={fullScreen?<RiFullscreenExitFill />:<BsFullscreen />}
+            icon={fullScreen ? <RiFullscreenExitFill /> : <BsFullscreen />}
           />
         )}
 
-        <NavButton
-          title="התראות"
+        <DoButton
+          color={currentColor}
+          tooltip="התראות"
+          size="2xl"
           dotColor="#fd0061"
-          customFunc={() => handleClick("notification")}
+          classN="bg-white dark:bg-secondary"
+          customFunc={() => handleCloseModal("notification")}
           icon={<MdOutlineNotificationsActive />}
         />
 
         <TooltipComponent content="משתמש" position="BottomCenter">
           <div
-            className="flex items-center gap-4 shadow-sm cursor-pointer p-1 bg-white dark:hover:bg-slate-300 dark:bg-secondary hover:bg-slate-200 rounded-lg"
-            onClick={() => handleClick("userProfile")}
-            style={{color: currentColor}}
+            className="text-lg flex items-center gap-4 shadow-md cursor-pointer p-1 bg-white dark:hover:bg-slate-300 dark:bg-secondary hover:bg-slate-200 rounded-lg"
+            onClick={() => handleCloseModal("userProfile")}
+            style={{ color: currentColor }}
           >
-            <MdKeyboardArrowDown className=" text-14" />
+            <MdKeyboardArrowDown className="" />
             <p>
-              <span className=" font-bold ml-1 text-14">
-                אלעזר
-              </span>
+              <span className=" ml-1">{user.name}</span>
             </p>
             <img
               className="rounded-full w-8 h-8"
@@ -86,8 +69,8 @@ const NavButtons = () => {
         </TooltipComponent>
 
         {/* Actives the requested area according to the button pressed */}
-        {isClicked.notification && <Notification />}
-        {isClicked.userProfile && <UserProfile />}
+        {isModalOpen.notification && <Notification />}
+        {isModalOpen.userProfile && <UserProfile />}
       </div>
     </div>
   );

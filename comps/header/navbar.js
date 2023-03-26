@@ -6,7 +6,6 @@ const Navbar = () => {
   const {
     openSidebar,
     setOpenSidebar,
-    setScreenSize,
     screenSize,
     currentColor,
   } = useStateContext();
