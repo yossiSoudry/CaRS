@@ -617,27 +617,27 @@ export const cartData = [
 export const earningData = [
   {
     icon: <MdOutlineSupervisorAccount />,
-    amount: '39,354',
+    amount: '54',
     percentage: '-4%',
-    title: 'Customers',
+    title: 'פניות באמצעות האתר',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
     pcColor: 'red-600',
   },
   {
     icon: <BsBoxSeam />,
-    amount: '4,396',
+    amount: '6',
     percentage: '+23%',
-    title: 'Products',
+    title: 'ביטולים',
     iconColor: 'rgb(255, 244, 229)',
     iconBg: 'rgb(254, 201, 15)',
     pcColor: 'green-600',
   },
   {
     icon: <FiBarChart />,
-    amount: '423,39',
+    amount: '339',
     percentage: '+38%',
-    title: 'Sales',
+    title: 'הזמנות',
     iconColor: 'rgb(228, 106, 118)',
     iconBg: 'rgb(255, 244, 229)',
 
@@ -645,9 +645,9 @@ export const earningData = [
   },
   {
     icon: <HiOutlineRefresh />,
-    amount: '39,354',
+    amount: '39',
     percentage: '-12%',
-    title: 'Refunds',
+    title: 'השכרות פעילות',
     iconColor: 'rgb(0, 194, 146)',
     iconBg: 'rgb(235, 250, 242)',
     pcColor: 'red-600',
@@ -3120,13 +3120,10 @@ export const lineCustomSeries = [
 ];
 
 export const pieChartData = [
-  { x: 'Labour', y: 18, text: '18%' },
-  { x: 'Legal', y: 8, text: '8%' },
-  { x: 'Production', y: 15, text: '15%' },
-  { x: 'License', y: 11, text: '11%' },
-  { x: 'Facilities', y: 18, text: '18%' },
-  { x: 'Taxes', y: 14, text: '14%' },
-  { x: 'Insurance', y: 16, text: '16%' },
+  { x: 'פנוי', y: 8, text: '18%' },
+  { x: 'השכרה', y: 2, text: '8%' },
+  { x: 'מוסך', y: 15, text: '15%' },
+  { x: 'נמכר', y: 11, text: '11%' },
 ];
 
 export const contextMenuItems = [

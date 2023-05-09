@@ -8,10 +8,9 @@ import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import EditIcon from "@mui/icons-material/Edit";
-// import { Padding } from "@mui/icons-material";
+import { Tooltip } from 'antd';
 import { RiFullscreenExitFill } from "react-icons/ri";
 import { useStateContext } from "../../contexts/contextProvider";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 
 export default function OpenIconSpeedDial() {
@@ -38,7 +37,7 @@ export default function OpenIconSpeedDial() {
         height: 320,
         transform: "translateZ(20px)",
       }}
-    > <TooltipComponent content="צור" position="RightBottom">
+    > <Tooltip placement='top' title='צור'>
       <SpeedDial
         ariaLabel="SpeedDial"
         sx={{  }}
@@ -52,16 +51,16 @@ export default function OpenIconSpeedDial() {
           }
         }}
       >
-        {actions.map((action) => (
+        {actions.map((action, i) => (
           <SpeedDialAction
-            key={action.name}
+            key={i}
             icon={action.icon}
             tooltipTitle={action.name}
             onClick={action.onClick}
           />
         ))}
       </SpeedDial>
-      </TooltipComponent>
+      </Tooltip>
       {/* <SpeedDial
         ariaLabel="SpeedDial openIcon example"
         

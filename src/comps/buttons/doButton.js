@@ -1,6 +1,4 @@
-// import { useState } from "react";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-// import { useStateContext } from "../../contexts/contextProvider";
+import { Tooltip } from 'antd';
 
 const DoButton = ({
   size,
@@ -12,26 +10,24 @@ const DoButton = ({
   borderRadius,
   text,
   classN,
-  position,
   width,
-  tooltip
+  title
 }) => {
-  // const { currentColor } = useStateContext();
   return (
-    <TooltipComponent content={tooltip} position={position || "BottomCenter"} >
-      <button
-        type="button"
-        onClick={customFunc}
-        style={{ backgroundColor: bgColor, color, borderRadius }}
-        className={` text-${size} w-${width} relative text-center shadow-md gap-4 cursor-pointer p-2 rounded-lg ${classN}`}
-      >
-        <span
-          style={{ background: dotColor }}
-          className="absolute animate-ping rounded-full flex h-2 w-2 left-2 top-2"
-        />
-        {icon} {text}
-      </button>
-    </TooltipComponent>
+    <Tooltip placement='top' title={title}>
+        <button
+          type='button'
+          onClick={customFunc}
+          style={{ backgroundColor: bgColor, color, borderRadius }}
+          className={` text-${size} w-${width} relative text-center border border-gray-200 dark:border-gray-700 hover:scale-110 duration-300 shadow-md gap-4 cursor-pointer p-2 rounded-lg ${classN}`}
+        >
+          <span
+            style={{ background: dotColor }}
+            className='absolute animate-ping rounded-full flex h-2 w-2 left-2 top-2'
+          />
+          {icon} {text}
+        </button>
+    </Tooltip>
   );
 };
 

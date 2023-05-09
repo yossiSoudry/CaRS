@@ -26,9 +26,9 @@ const Notification = () => {
         />
       </div>
       <div className="mt-5 ">
-        {chatData?.map((item, index) => (
+        {chatData?.map((item, i) => (
           <div
-            key={index}
+            key={i}
             className="flex gap-5 border-b-1 justify-between border-color p-4 px-8 hover:scale-110 hover:bg-slate-200 cursor-pointer delay-75 duration-300 dark:hover:bg-[#69707d] rounded-xl"
           >
             <div>

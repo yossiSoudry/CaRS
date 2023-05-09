@@ -56,16 +56,26 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 export default function Settings() {
   const {
-    setColor,
-    setMode,
     currentColor,
+    setCurrentColor,
+    setCurrentMode,
     currentMode,
   } = useStateContext();
+
+  const setMode = (e) => {
+    setCurrentMode(e.target.value);
+    localStorage.themeMode = e.target.value;
+  };
+
+  const setColor = (color) => {
+    setCurrentColor(color);
+    localStorage.colorMode = color;
+  };
 
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl dark:bg-secondary dark:text-gray-200">
       <Box sx={{}} className="" style={{ zIndex: 0 }}>
-                  <div className="p-4 border-t-1 border-color ml-4">
+                  <div className="p-4 border-t-1 border-stone-200 dark:border-stone-500 ml-4">
                     <p className="font-semibold text-xl text-center mb-8">
                       כהה / בהיר
                     </p>
@@ -82,7 +92,7 @@ export default function Settings() {
                     </div>
                   </div>
 
-                  <div className="p-4 border-t-1 border-color ml-4">
+                  <div className="p-4 border-t-1 border-stone-200 dark:border-stone-500 ml-4">
                     <p className="font-semibold text-xl text-center mb-8">
                       ערכת צבעים
                     </p>
@@ -94,7 +104,9 @@ export default function Settings() {
                         >
                           <button
                             type="button"
-                            className="h-10 w-10 rounded cursor-pointer"
+                            className={`h-10 w-10 hover:ring-2 hover:ring-slate-500 rounded cursor-pointer ${
+                              item.color === currentColor ? "ring-2 ring-slate-500" : ""
+                            }`}
                             style={{ backgroundColor: item.color }}
                             onClick={() => setColor(item.color)}
                           >

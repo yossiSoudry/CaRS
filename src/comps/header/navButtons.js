@@ -6,9 +6,9 @@ import elazar from "../../data/images/try/elazar.png";
 import { BsFullscreen } from "react-icons/bs";
 import { RiFullscreenExitFill } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import DoButton from "../buttons/doButton";
+import { Tooltip } from "antd";
 
 const NavButtons = () => {
   const { handleCloseModal, isModalOpen, screenSize, currentColor, user } =
@@ -42,7 +42,7 @@ const NavButtons = () => {
 
         <DoButton
           color={currentColor}
-          tooltip="התראות"
+          title="התראות"
           size="2xl"
           dotColor="#fd0061"
           classN="bg-white dark:bg-secondary"
@@ -50,7 +50,7 @@ const NavButtons = () => {
           icon={<MdOutlineNotificationsActive />}
         />
 
-        <TooltipComponent content="משתמש" position="BottomCenter">
+<Tooltip placement='top' title='משתמש'>
           <div
             className="text-lg flex items-center gap-4 shadow-md cursor-pointer p-1 bg-white dark:hover:bg-slate-300 dark:bg-secondary hover:bg-slate-200 rounded-lg"
             onClick={() => handleCloseModal("userProfile")}
@@ -66,7 +66,7 @@ const NavButtons = () => {
               alt="user-profile"
             />
           </div>
-        </TooltipComponent>
+        </Tooltip>
 
         {/* Actives the requested area according to the button pressed */}
         {isModalOpen.notification && <Notification />}

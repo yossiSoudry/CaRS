@@ -36,8 +36,8 @@ const UserProfile = () => {
         />
       </div>
       <div>
-        {userProfileData.map((item, index) => (
-          <div key={index} className="flex gap-5 border-b-1 border-color p-4 hover:bg-slate-200 hover:scale-110 cursor-pointer delay-75 duration-300 dark:hover:bg-[#69707d] rounded-xl">
+        {userProfileData.map((item, i) => (
+          <div key={i} className="flex gap-5 border-b-1 border-color p-4 hover:bg-slate-200 hover:scale-110 cursor-pointer delay-75 duration-300 dark:hover:bg-[#69707d] rounded-xl">
             <button
               type="button"
               style={{ color: currentColor }}
@@ -57,7 +57,7 @@ const UserProfile = () => {
         <DoButton
           color="white"
           bgColor={currentColor}
-          tooltip="התנתקות"
+          title="התנתקות"
           borderRadius="10px"
           // width="full"
           size="xl"

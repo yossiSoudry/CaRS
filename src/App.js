@@ -1,13 +1,21 @@
-import "./app.css";
-import { BrowserRouter } from "react-router-dom";
-import Routers from "./comps/routes";
-
+import { BrowserRouter } from 'react-router-dom';
+import Routers from './comps/routes';
+import { useStateContext } from './contexts/contextProvider';
+import { useEffect } from 'react';
+import ColorsInit from './data/colorsInit';
 
 const App = () => {
+  const { currentColor } = useStateContext();
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--current-color', currentColor);
+  }, [currentColor]);
+
   return (
-      <BrowserRouter id={'app'}>
-       <Routers/>
-      </BrowserRouter>
+    <BrowserRouter id={'app'}>
+      <Routers />
+    <ColorsInit />
+    </BrowserRouter>
   );
 };
 

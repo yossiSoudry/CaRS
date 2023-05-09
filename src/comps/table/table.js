@@ -1,116 +1,170 @@
-import React, { useEffect, useState } from "react";
-import { SlPrinter } from "react-icons/sl";
-import { TfiDownload } from "react-icons/tfi";
-import { RxRows } from "react-icons/rx";
-import { HiEllipsisVertical } from "react-icons/hi2";
-import { BsBorderAll, BsArrowsExpand, BsArrowDown, BsArrowUp } from "react-icons/bs";
-import { useStateContext } from "../../contexts/contextProvider";
-import TrComp from "./trComp";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import { useEffect, useState, useRef } from 'react';
+import { RiPlayListAddLine } from 'react-icons/ri';
+import { useReactToPrint } from 'react-to-print';
+import { Modal } from 'antd';
+import { useStateContext } from '../../contexts/contextProvider';
+import { URL } from '../../data/constants';
+import Tr from './tr';
+import Toolbar from './toolbar/toolbar';
+import Thead from './thead';
+import Tbody from './tbody';
+import Loading from './loading/loading';
+import Pagination from './pagination/paginationComp';
+import SearchComp from './search/searchComp';
+import DoButton from '../buttons/doButton';
+import AddForm from '../forms/addForm';
+import { TableContext } from '../../contexts/tableContext';
 
-const Table = ({ rows, columns }) => {
-  const { screenSize } = useStateContext();
-  const [space, setSpace] = useState(2);
-  const [displayLines, setDisplayLines] = useState(true);
+const Table = ({ rows, columns, titles, setRow, setsData, search, form }) => {
+  // Url for data
+  const targetURL = `${URL}/${titles[2]}`;
+  // Context
+  const {
+    screenSize,
+    isLoading,
+    currentColor,
+    currentMode,
+    openSidebar,
+    displayLines,
+    setDisplayLines,
+    lineSpacing,
+    setLineSpacing,
+    stickyRight,
+    setStickyRight,
+    stickyLeft,
+    setStickyLeft,
+  } = useStateContext();
+  // Pagination
+  // const [pageNum, setPageNum] = useState(1);
+  
+  // const [limitForReq, setLimitForReq] = useState(localStorage.limitForReq || 10);
+  
+  // const [reverse, setReverse] = useState(false);
+  // Modal
+  const [openForm, setOpenForm] = useState(false);
+
+  // For loading
+  const rowLoading = [columns, columns, columns, columns, columns, columns, columns, columns, columns, columns];
+
+  // Responsive cases
   useEffect(() => {
     if (screenSize <= 1000) setDisplayLines(false);
     else setDisplayLines(true);
   }, [screenSize]);
 
+  // Columns sticky
+  const handleStickyRight = () => {
+    if (stickyRight > 1) {
+      setStickyRight(0);
+      localStorage.stickyRight = 0;
+    } else {
+      setStickyRight(stickyRight + 1);
+      localStorage.stickyRight = stickyRight + 1;
+    }
+  };
+  const handleStickyLeft = () => {
+    if (stickyLeft > 1) {
+      setStickyLeft(0);
+      localStorage.stickyLeft = 0;
+    } else {
+      setStickyLeft(stickyLeft + 1);
+      localStorage.stickyLeft = stickyLeft + 1;
+    }
+  };
+  const headerSticky = (column) => {
+    return column.col === 'main' && stickyRight > 0
+      ? 'sticky right-0 bg-gray-100 dark:bg-zinc-600'
+      : column.col === 'titles' && stickyRight > 1
+      ? 'sticky right-[180px] bg-gray-100 dark:bg-zinc-600'
+      : column.col === 'badge' && stickyLeft > 1
+      ? 'sticky left-0 bg-gray-100 dark:bg-zinc-600'
+      : column.col === 'actions' && stickyLeft > 0
+      ? 'sticky left-0 bg-gray-100 dark:bg-zinc-600'
+      : '';
+  };
+
+  // Lines spacing
+  const handleLineSpacing = (space) => {
+    setLineSpacing(space);
+    localStorage.lineSpacing = space;
+  };
+
+  // Print functions
+  const tableRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => tableRef.current,
+  });
+
   return (
-    <>
-      <div className="sm:px-6 text-neutral-500 dark:text-neutral-400 flex gap-3 md:gap-4 px-2 mb-3">
-        {displayLines ? (
-          <TooltipComponent content="תצוגת רשת" position="BottomRight">
-            <BsBorderAll
-              className="w-5 h-5 hover:text-slate-400"
-              onClick={() => setDisplayLines(!displayLines)}
+    <TableContext values={form[0]} setValues={form[1]} >
+      <div className='md:flex justify-between items-end'>
+        <Toolbar
+          handlePrint={handlePrint}
+          rows={rows}
+          title={titles[0]}
+          handleLineSpacing={handleLineSpacing}
+          handleStickyRight={handleStickyRight}
+          handleStickyLeft={handleStickyLeft}
+        />
+        {form && (
+          <div className='flex justify-center delay-50 duration-500'>
+            <DoButton
+              color={currentColor}
+              title={`הוספת ${titles[1]}`}
+              size='4xl'
+              icon={<RiPlayListAddLine onClick={() => setOpenForm(true)} />}
             />
-          </TooltipComponent>
-        ) : (
-          <TooltipComponent content="תצוגת שורה" position="BottomRight">
-            <RxRows
-              className="w-5 h-5 hover:text-slate-400"
-              onClick={() => setDisplayLines(!displayLines)}
-            />
-          </TooltipComponent>
+            <Modal
+              centered
+              open={openForm}
+              onOk={() => setOpenForm(false)}
+              onCancel={() => setOpenForm(false)}
+              width={1120}
+              footer={null}
+              className={currentMode === 'dark' ? 'dark' : 'light'}
+            >
+              <AddForm
+                formInputs={form[2]}
+                cleanValues={form[3]}
+                FormFunc={form[4]}
+                setOpenForm={setOpenForm}
+                url={targetURL}
+                title={titles[1]}
+              />
+            </Modal>
+          </div>
         )}
-        <TooltipComponent content="הדפסה" position="BottomRight">
-            <SlPrinter
-              className="w-5 h-5 hover:text-slate-400"
-            />
-          </TooltipComponent>
-        <TooltipComponent content="הורדה לאקסל" position="BottomRight">
-            <TfiDownload
-              className="w-5 h-5 hover:text-slate-400"
-            />
-          </TooltipComponent>
-        <div className="flex items-center my-auto h-6 py-2 border dark:border-neutral-600 rounded-md">
-          <TooltipComponent content="ציפוף" position="BottomRight">
-            <p
-              className="hover:text-slate-400 px-2 text-lg cursor-pointer"
-              onClick={() => space > 1 && setSpace(space - 1)}
-            >
-              -
-            </p>
-          </TooltipComponent>
-          <BsArrowsExpand className="dark:text-neutral-400 h-5" />
-          <TooltipComponent content="ריווח" position="BottomRight">
-            <p
-              className="hover:text-slate-400 px-2 text-sm cursor-pointer"
-              onClick={() => space < 4 && setSpace(space + 1)}
-            >
-              +
-            </p>
-          </TooltipComponent>
-        </div>
+        <SearchComp keys={search[0]} keysDate={search[1]} fixData={search[2]} setData={setsData} url={targetURL} />
       </div>
       {displayLines ? (
-        <div className="shadow dark:shadow-xl border border-neutral-200 dark:border-neutral-800 min-h-[780px] max-h-[780px] overflow-auto rounded-lg m-2">
-          <table className="min-w-full max-w-[100%] table-auto divide-y divide-gray-200 dark:divide-gray-500">
-            <thead className="bg-gray-100 dark:bg-zinc-600  sticky top-0 pr-20">
-              <tr>
-                {columns.map((column) => (
-                  <th
-                    key={column.id}
-                    scope="col"
-                    className="group px-6 py-3 whitespace-nowrap cursor-default text-right text-lg font-medium text-gray-500 dark:text-gray-300"
-                  >
-                    <div className="flex items-center gap-2">
-                    {column.title} 
-                    <BsArrowDown className="hidden group-hover:block dark:hover:bg-neutral-500 hover:bg-white rounded-full" />
-                    <HiEllipsisVertical className="hidden group-hover:block dark:hover:bg-neutral-500 hover:bg-white rounded-full" />
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="bg-white max-h-screen overflow-y-scroll dark:bg-secondary divide-y divide-gray-100 dark:divide-gray-600">
-              {rows.map((row) => (
-                <TrComp
-                  space={space}
-                  columns={columns}
-                  row={row}
-                  key={row.id}
-                  displayLines={displayLines}
-                />
-              ))}
-            </tbody>
+        <div className='shadow dark:shadow-xl border border-neutral-200 dark:border-neutral-800 max-h-[calc(100vh-29vh)] overflow-auto rounded-lg m-2'>
+          <table
+            className='min-w-full max-w-[100%] table-auto divide-y divide-gray-200 dark:divide-gray-500'
+            ref={tableRef}
+          >
+            <Thead columns={columns} headerSticky={headerSticky} />
+            <Tbody isLoading={isLoading} rowLoading={rowLoading} rows={rows} columns={columns} setRow={setRow} />
           </table>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 m-2">
-          {rows.map((row) => (
-            <TrComp
-              columns={columns}
-              row={row}
-              key={row.id}
-              displayLines={displayLines}
-            />
-          ))}
+        <div
+          className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 ${
+            !openSidebar ? '2xl:grid-cols-4' : screenSize > 1670 && '2xl:grid-cols-4'
+          } ${screenSize > 2000 && '2xl:grid-cols-5'} gap-4 m-2 mt-5`}
+        >
+          {isLoading ? (
+            <Loading rowLoading={rowLoading} />
+          ) : (
+            <>
+              {rows.map((row, i) => (
+                <Tr columns={columns} row={row} key={i} setRow={setRow} />
+              ))}
+            </>
+          )}
         </div>
       )}
-    </>
+      <Pagination url={targetURL} rows={rows} />
+    </TableContext>
   );
 };
 

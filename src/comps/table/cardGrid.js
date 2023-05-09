@@ -1,64 +1,93 @@
-import React from "react";
-import { Fragment } from "react";
-import { useStateContext } from "../../contexts/contextProvider";
+import React, { Fragment } from 'react';
+import { Modal, Tooltip } from 'antd';
+import Files from '../pages/files/files';
+import { ModalTable } from './modalTable';
 
 function CardGrid({
+  i,
   setEdit,
   row,
   space,
-  // roleColor,
-  // setRoleColor,
-  // roles,
   edit,
-  MdEdit,
-  AiOutlineSave,
+  EditOutlined,
+  FolderOutlined,
+  SaveOutlined,
   columns,
+  dateTimer,
+  currentColor,
+  open,
+  setOpen,
+  updateOne,
 }) {
-  const { currentColor } = useStateContext();
+  const getImagePath = (column, row) => {
+    if (column.value[0] === 'cars') return `/images/${column.value[0]}/${row[column.value[1][0]].toLowerCase()}.png`;
+    else return `/images/${column.value[0]}/default.png`;
+  };
   return (
     <div
-      className="bg-gray-100 dark:bg-zinc-600 p-4 rounded-2xl shadow hover:bg-gray-200 hover:scale-105 dark:hover:bg-gray-700 duration-300"
-      key={row.id}
+      className='bg-gray-100 dark:bg-zinc-600 p-4 rounded-2xl shadow hover:bg-gray-200 hover:scale-105 dark:hover:bg-gray-700 duration-300'
+      key={i}
     >
-      <div className="flex justify-center">
-        <div className="block w-full rounded-2xl bg-white hover:bg-slate-100 text-center shadow-lg dark:bg-neutral-700 dark:hover:bg-neutral-800">
-          {columns.map((column) => {
+      <div className='flex justify-center'>
+        <div className='block w-full rounded-2xl bg-white hover:bg-slate-100 text-center shadow-lg dark:bg-neutral-700 dark:hover:bg-neutral-800'>
+          {columns.map((column, i) => {
             return (
-              <Fragment key={column.id}>
-                {column.col === "main" && (
-                  <div className="border-b-2 flex gap-3 items-center justify-center border-neutral-100 text-xl py-3 px-6 dark:border-neutral-600 dark:text-neutral-50">
-                    <div className="">{row[column.value[1]]}</div>
-                    <div className="flex-shrink-0 h-10 w-10 hover:scale-110 duration-500">
+              <Fragment key={i}>
+                {column.col === 'main' && (
+                  <div className='border-b-2 flex gap-3 items-center justify-center border-neutral-100 text-md py-3 px-6 dark:border-neutral-600 dark:text-neutral-50'>
+                    <div className='flex-shrink-0 h-10 w-10 hover:scale-110 duration-500'>
                       <img
-                      className="h-10 w-10 rounded-full hover:scale-110 duration-500"
-                        src={
-                          row[column.value[0]] ||
-                          require("../../data/images/cars/mazda.png") || 
-                          ""
-                        }
-                        // src={require(`../../data/images/${column.value[0]}/${row[column.value[1]].toLowerCase()}.png`)}
-                        alt={`${row[column.value[1]]} image`}
+                        className='h-10 w-10 rounded-full hover:scale-110 duration-500'
+                        src={getImagePath(column, row)}
+                        alt={`${row[column.value[1][0]]}`}
                       />
+                    </div>
+                    <div>
+                      <div
+                        contentEditable={column.editable && edit}
+                        suppressContentEditableWarning={true}
+                        onBlur={(e) => {
+                          row[column.value[1]] = e.currentTarget.textContent;
+                        }}
+                        className=''
+                      >
+                        {row[column.inObj] ? row[column.inObj][column.value[1][0]] : row[column.value[1][0]]}
+                        {'  '}
+                        {row[column.value[1][1]]}
+                      </div>
+                      {column.lines === 2 && (
+                        <div className='text-sm text-start text-gray-500 dark:text-gray-400'>
+                          {row[column.value[2][0]]}
+                          {'  '}
+                          {row[column.value[2][1]]}
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
                 <>
-                  {column.col === "titles" && (
+                  {column.col === 'titles' && (
                     <>
                       <div
                         className={`text-xl py-1 py-${space} font-semibold text-gray-900 whitespace-nowrap dark:text-white`}
-                        contentEditable={edit}
+                        contentEditable={column.editable && edit}
                         suppressContentEditableWarning={true}
+                        onBlur={(e) => {
+                          row[column.value[0]] = e.currentTarget.textContent;
+                        }}
                       >
                         {row[column.value[0]]}
                       </div>
                       {column.lines === 2 && (
-                        <div className="text-lg text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          {column.title}: {"   "}
+                        <div className='text-md text-gray-500 whitespace-nowrap dark:text-gray-400'>
+                          {column.title}: {'   '}
                           <span
-                            contentEditable={edit}
+                            contentEditable={column.editable && edit}
                             suppressContentEditableWarning={true}
-                            className="font-semibold"
+                            className='font-semibold'
+                            onBlur={(e) => {
+                              row[column.value[1]] = e.currentTarget.textContent;
+                            }}
                           >
                             {row[column.value[1]]}
                           </span>
@@ -66,43 +95,101 @@ function CardGrid({
                       )}
                     </>
                   )}
-                  {column.col === "single" && (
-                    <div className={`text-lg py-1 py-${space} text-gray-500 whitespace-nowrap dark:text-gray-400`}>
-                      {column.title}: {"   "}
+                  {column.col === 'simple' && (
+                    <div
+                      className={`text-md py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-gray-200`}
+                    >
+                      {column.title}: {'   '}
                       <span
-                        contentEditable={edit}
+                        contentEditable={column.editable === true && edit}
                         suppressContentEditableWarning={true}
-                        className="font-semibold"
+                        className='font-semibold dark:text-gray-400'
+                        onBlur={(e) => {
+                          row[column.value[0]] = e.currentTarget.textContent;
+                        }}
                       >
-                        {row[column.value[0]]}
+                        {row[column.inObj] ? row[column.inObj][column.value[0]] : row[column.inArr] ? `${row[column.inArr].length}` : row[column.value[0]]}
                       </span>
+                      {column.lines === 2 && (
+                        <span
+                          contentEditable={column.editable === true && edit}
+                          suppressContentEditableWarning={true}
+                          className='font-semibold'
+                          onBlur={(e) => {
+                            row[column.value[1]] = e.currentTarget.textContent;
+                          }}
+                        >
+                          {row[column.value[1]]}
+                        </span>
+                      )}
                     </div>
                   )}
-                  {column.col === "links" && (
+                  {column.col === 'simpleObj' && (
+                    <div className={`ml-4 py-1 py-${space} flex flex-col`}>
+                      <div className='text-sm text-gray-900 whitespace-nowrap dark:text-white'>
+                        {row[column.inObj][column.value[0]]} {row[column.inObj][column.value[1]]}
+                      </div>
+                      {column.lines === 2 && (
+                        <div className='text-sm text-gray-900 whitespace-nowrap dark:text-white'>
+                          {row[column.inObj][column.value[1]]}
+                        </div>
+                      )}
+                      {edit && column.editable && (
+                        <>
+                          <ModalTable tableSearch={column.table} item={column.inObj} row={row} />
+                        </>
+                      )}
+                    </div>
+                  )}
+                  {column.col === 'arrayObj' && (
+                    <div className={`ml-4 py-1 py-${space} flex flex-col`}>
+                      <h4>{column.title}</h4>
+                      <div className='block text-sm text-gray-900 whitespace-nowrap dark:text-white'>
+                        {row[column.inObj].map((item, i) => {
+                          return (
+                            <Fragment key={i}>
+                              <span className='block'>{item[column.value[0]]}</span>
+                              {edit && column.editable && (
+                                <>
+                                  <ModalTable tableSearch={column.table} item={column.inObj} row={row} index={i} />
+                                </>
+                              )}
+                            </Fragment>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                  {column.col === 'links' && (
                     <div className={`ml-4 py-1 py-${space} flex flex-col`}>
                       <a
                         href={`mailto: ${row[column.value[0]]}`}
-                        className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
+                        className='text-sm font-medium text-blue-600 hover:underline dark:text-blue-500'
+                        contentEditable={column.editable && edit}
+                        suppressContentEditableWarning={true}
                       >
                         {row[column.value[0]]}
                       </a>
                       <a
                         href={`tel:${row[column.value[1]]}`}
-                        className="text-sm text-gray-500 hover:underline dark:text-gray-400"
+                        className='text-sm text-gray-500 hover:underline dark:text-gray-400'
+                        contentEditable={column.editable && edit}
+                        suppressContentEditableWarning={true}
                       >
                         {row[column.value[1]]}
                       </a>
                     </div>
                   )}
-                  {column.col === "badge" && (
+                  {column.col === 'badge' && (
                     <>
                       {edit ? (
                         <select
+                          onBlur={(e) => {
+                            row[column.value] = e.currentTarget.value;
+                          }}
                           defaultValue={row[column.value]}
                           className={`px-2 py-1 py-${space} inline-flex text-xs leading-5 font-semibold rounded-lg bg-${
-                            column.colors[
-                              column.option.indexOf(row[column.value])
-                            ]
+                            column.colors[column.option.indexOf(row[column.value])]
                           }-300 text-green-900`}
                           // onChange={(e) =>
                           //   setRoleColor(
@@ -113,9 +200,7 @@ function CardGrid({
                           //   )
                           // }
                         >
-                          <option className="d-none">
-                            {/* {row[column.value]} */}
-                          </option>
+                          <option className='d-none'>{/* {row[column.value]} */}</option>
                           {column.option.map((val, i) => {
                             return (
                               <option
@@ -131,9 +216,7 @@ function CardGrid({
                       ) : (
                         <div
                           className={`px-2 my-2 my-${space} inline-flex text-xs leading-5 font-semibold rounded-lg bg-${
-                            column.colors[
-                              column.option.indexOf(row[column.value])
-                            ]
+                            column.colors[column.option.indexOf(row[column.value])]
                           }-300 text-green-900`}
                         >
                           {row[column.value]}
@@ -142,21 +225,78 @@ function CardGrid({
                     </>
                   )}
                 </>
-                {column.col === "icon" && (
-                  <div className="border-t-2 flex justify-center items-center gap-5 border-neutral-100 py-3 px-6 dark:border-neutral-600 dark:text-neutral-50">
-                    <div className="flex">
+                {column.col === 'actions' && (
+                  <div
+                    className={`border-t-2 flex justify-center items-center gap-5 border-neutral-100 py-3 px-6 dark:border-neutral-600 dark:text-neutral-50`}
+                  >
+                    <div className='flex gap-3'>
                       {edit ? (
-                        <AiOutlineSave
-                          className=" hover:scale-125 text-xl duration-300 cursor-pointer"
-                          style={{ color: currentColor }}
-                          onClick={() => setEdit(!edit)}
-                        />
+                        <Tooltip placement='top' title='שמירה'>
+                          <SaveOutlined
+                            className=' hover:scale-125 text-xl duration-300 cursor-pointer mt-1'
+                            style={{ color: currentColor }}
+                            onClick={() => {
+                              updateOne() && setEdit(!edit);
+                            }}
+                          />
+                        </Tooltip>
                       ) : (
-                        <MdEdit
-                          className=" hover:scale-125 text-xl duration-300 cursor-pointer"
-                          style={{ color: currentColor }}
-                          onClick={() => setEdit(!edit)}
-                        />
+                        <>
+                          <Tooltip placement='top' title='עריכה'>
+                            <EditOutlined
+                              className=' hover:scale-125 text-xl duration-300 cursor-pointer'
+                              style={{ color: currentColor }}
+                              onClick={() => setEdit(!edit)}
+                            />
+                          </Tooltip>
+                          <Tooltip placement='top' title='מסמכים'>
+                            <FolderOutlined
+                              className=' hover:scale-125 text-xl duration-300 cursor-pointer'
+                              style={{ color: currentColor }}
+                              onClick={() => setOpen(true)}
+                            />
+                            <Modal
+                              title='תיקיית מסמכים'
+                              centered
+                              open={open}
+                              onOk={() => setOpen(false)}
+                              onCancel={() => setOpen(false)}
+                              width={1000}
+                              okText='אוקיי'
+                              cancelText='ביטול'
+                            >
+                              <Files />
+                            </Modal>
+                          </Tooltip>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                )}
+                {column.col === 'calc-date' && (
+                  <div className={`text-md py-1 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-gray-200`}>
+                    <div className='flex items-center gap-1.5'>
+                      {`${column.title}: `}
+                      <div
+                        className='font-semibold dark:text-gray-400'
+                        contentEditable={column.editable && edit}
+                        suppressContentEditableWarning={true}
+                        onBlur={(e) => {
+                          row[column.value[0]] = e.currentTarget.textContent;
+                        }}
+                      >
+                        {row[column.value]}
+                      </div>
+                      {dateTimer(row[column.value]) < 30 ? (
+                        <div className='text-pink-500 text-sm mb-0.5'>
+                          {`${dateTimer(row[column.value]) < 0 ? 'לפני' : 'בעוד'} ${Math.abs(
+                            dateTimer(row[column.value])
+                          )} ימים`}
+                        </div>
+                      ) : (
+                        <div className='text-gray-500 text-sm mb-0.5'>
+                          {`בעוד ${dateTimer(row[column.value])} ימים`}
+                        </div>
                       )}
                     </div>
                   </div>
