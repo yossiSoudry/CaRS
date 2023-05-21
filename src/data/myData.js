@@ -1,374 +1,39 @@
-import React from 'react';
-import { AiOutlineCalendar, AiOutlineShoppingCart, AiOutlineAreaChart, AiOutlineBarChart, AiOutlineStock, AiFillCar } from 'react-icons/ai';
-import { FiShoppingBag, FiEdit, FiPieChart, FiBarChart, FiCreditCard, FiStar, FiShoppingCart, FiSettings } from 'react-icons/fi';
-import { BsKanban, BsBarChart, BsBoxSeam, BsCurrencyDollar, BsShield, BsChatLeft } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { GoMailRead } from 'react-icons/go';
 import { FaTasks } from 'react-icons/fa';
-import { BiColorFill } from 'react-icons/bi';
-import { IoMdContacts } from 'react-icons/io';
-import { RiContactsLine, RiStockLine, RiAdminLine } from 'react-icons/ri';
-import { MdOutlineSupervisorAccount } from 'react-icons/md';
-import { HiOutlineRefresh } from 'react-icons/hi';
-import { TiTick } from 'react-icons/ti';
-import { GiLouvrePyramid } from 'react-icons/gi';
-import { GrLocation } from 'react-icons/gr';
-import Avatar from "@mui/material/Avatar";
 import elazar from './images/try/elazar.png';
-import avatar2 from './images/try/avatar2.jpg';
-import avatar3 from './images/try/avatar3.png';
-import avatar4 from './images/try/avatar4.jpg';
+import yossi from "./images/try/yossi.jpeg";
+import ofer from "./images/try/ofer.jpeg";
+
+// export const carObjSearch = [
+//   ["branch", "סניף"],
+//   ["class", "דרגה"],
+//   ["color", "צבע"],
+//   ["deductible", "שנה"],
+//   ["finish_level", "רמת גימור"],
+//   ["fuel_type", "סוג דלק"],
+//   ["km", "קמ"],
+//   ["license_number", "מספר רכב"],
+//   ["manufacturer_en", "שם החברה באנגלית"],
+//   ["manufacturer_hb", "שם החברה בעברית"],
+//   ["model_en", "דגם באנגלית"],
+//   ["model_hb", "דגם בעברית"],
+//   ["status", "סטטוס"],
+//   ["year", "שנה"]
+// ]
+
+// export const carObjDateSearch = [
+//   ["last_treatment", "טיפןל אחרון"],
+//   ["date_join", "תאריך הצטרפות"],
+//   ["exp_test", "תאריך טסט אחרון"],
+//   ["date_next_treatment", "תאריך הטיפול הבא"],
+//   ["exp_ins", "פקיעת ביטוח"]
+// ]
 
 
 
 
-// Menu data
-export const links = [
-  {
-    title: 'דשבורד',
-    links: [
-      {
-        name: 'ecommerce',
-        hebrew: 'סקירה כללית',
-        icon: <FiShoppingBag />,
-      },
-    ],
-  },
 
-  {
-    title: 'רכבים',
-    links: [
-      {
-        name: 'cars',
-        hebrew: 'צי רכב',
-        icon: <AiFillCar />,
-      },
-      {
-        name: 'orders',
-        hebrew: 'הזמנות',
-        icon: <AiOutlineShoppingCart />,
-      },
-      {
-        name: 'editor',
-        hebrew: 'איתור',
-        icon: <FiEdit />,
-      },
-    ],
-  },
-  {
-    title: 'לקוחות',
-    links: [
-      {
-        name: 'customers',
-        hebrew: 'רשימת לקוחות',
-        icon: <RiContactsLine />,
-      },
-      {
-        name: 'calendar',
-        hebrew: 'הזמנות',
-        icon: <AiOutlineCalendar />,
-      },
-      {
-        name: 'kanban',
-        icon: <BsKanban />,
-      },
-      {
-        name: 'color-picker',
-        icon: <BiColorFill />,
-      },
-    ],
-  },
-  {
-    title: 'מנהל',
-    links: [
-      {
-        name: 'permissions',
-        hebrew: 'הרשאות',
-        icon: <RiAdminLine />,
-      },
-    ],
-  },
-  {
-    title: 'תחזוקה',
-    links: [
-      {
-        name: 'settings',
-        hebrew: 'הגדרות',
-        icon: <FiSettings />,
-      },
-    ],
-  },
-];
-
-
-// Cars row data
-export const carsRow = [
-  {
-    id: 1,
-    licenseNumber: "85-510-85",
-    manufacturer: "OPEL",
-    model: "ASTRA",
-    finish_level: "berlina",
-    exp_ins: "01/06/2023",
-    year: 2017,
-    color: "כסוף",
-    km: 67825,
-    status: "פנוי",
-    branch: "בני ברק",
-    gas: "בנזין",
-    lest_rteatment: "18/08/2022",
-    code: "*1234",
-  },
-  {
-    id: 2,
-    licenseNumber: "361-89-202",
-    manufacturer: "MITSUBISHI",
-    model: "ATTRAGE",
-    finish_level: "LX",
-    exp_ins: "01/07/2023",
-    year: 2021,
-    color: "אפור",
-    km: 21523,
-    status: "השכרה",
-    branch: "ירושלים",
-    gas: "סולר",
-    lest_rteatment: "01/01/2023",
-    code: "*4422",
-  },
-  {
-    id: 3,
-    licenseNumber: "519-27-002",
-    manufacturer: "CHEVROLET",
-    model: "SPARK",
-    finish_level: "Eco",
-    exp_ins: "01/02/2024",
-    year: 2022,
-    color: "שחור",
-    km: 70500,
-    status: "מוסך",
-    branch: "בני ברק",
-    gas: "בנזין",
-    lest_rteatment: "22/02/2023",
-    code: "*6666",
-  },
-  {
-    id: 4,
-    licenseNumber: "69-525-34",
-    manufacturer: "CITROEN",
-    model: "BERLINGO",
-    finish_level: "Maxi",
-    exp_ins: "01/09/2023",
-    year: 2016,
-    color: "שמפניה",
-    km: 160399,
-    status: "השכרה",
-    branch: "בני ברק",
-    gas: "סולר",
-    lest_rteatment: "10/10/2022",
-    code: "X",
-  },
-  {
-    id: 5,
-    licenseNumber: "614-17-301",
-    manufacturer: "FORD",
-    model: "FOCUS",
-    finish_level: "comfort",
-    exp_ins: "30/11/2023",
-    year: 2021,
-    color: "שחור",
-    km: 37201,
-    status: "השכרה",
-    branch: "בית שמש",
-    gas: "היברידי",
-    lest_rteatment: "06/06/2022",
-    code: "*8520",
-  },
-  {
-    id: 6,
-    licenseNumber: "392-88-002",
-    manufacturer: "HYUNDAI",
-    model: "AIONIQ",
-    finish_level: "EL",
-    exp_ins: "30/11/2023",
-    year: 2021,
-    color: "בז'",
-    km: 7652,
-    status: "תקלה",
-    branch: "בני ברק",
-    gas: "היברידי",
-    lest_rteatment: "01/01/2023",
-    code: "*0258",
-  },
-  {
-    id: 7,
-    licenseNumber: "780-50-701",
-    manufacturer: "HYUNDAI",
-    model: "ACCENT",
-    finish_level: "active",
-    exp_ins: "01/01/2024",
-    year: 2020,
-    color: "לבן",
-    km: 119025,
-    status: "מוסך",
-    branch: "מודיעין עילית",
-    gas: "היברידי",
-    lest_rteatment: "01/01/2023",
-    code: "*1234",
-  },
-  {
-    id: 8,
-    licenseNumber: "741-01-402",
-    manufacturer: "KIA",
-    model: "CEED",
-    finish_level: "active",
-    exp_ins: "01/01/2024",
-    year: 2021,
-    color: "לבן",
-    km: 20000,
-    status: "פנוי",
-    branch: "אלעד",
-    gas: "היברידי",
-    lest_rteatment: "01/01/2023",
-    code: "*1234",
-  },
-  {
-    id: 9,
-    licenseNumber: "246-15-503",
-    manufacturer: "MAZDA",
-    model: "2",
-    finish_level: "active",
-    exp_ins: "01/01/2024",
-    year: 2022,
-    color: "לבן",
-    km: 20000,
-    status: "פנוי",
-    branch: "אלעד",
-    gas: "היברידי",
-    lest_rteatment: "01/01/2023",
-    code: "*1234",
-  },
-  {
-    id: 10,
-    licenseNumber: "202-24-701",
-    manufacturer: "NISSAN",
-    model: "SENTRA",
-    finish_level: "active",
-    exp_ins: "01/01/2024",
-    year: 2018,
-    color: "לבן",
-    km: 20000,
-    status: "פנוי",
-    branch: "אלעד",
-    gas: "היברידי",
-    lest_rteatment: "01/01/2023",
-    code: "*1234",
-  },
-  {
-    id: 11,
-    licenseNumber: "807-24-401",
-    manufacturer: "TOYOTA",
-    model: "COROLA",
-    finish_level: "active",
-    exp_ins: "01/01/2024",
-    year: 2021,
-    color: "לבן",
-    km: 200000,
-    status: "פנוי",
-    branch: "אלעד",
-    gas: "היברידי",
-    lest_rteatment: "01/01/2023",
-    code: "*1234",
-  },
-];
-
-
-// Cars column data
-export const carsColumn = [
-  { field: "licenseNumber", headerName: "מס' רישוי", width: 120 },
-  // {
-  //   width: 68,
-  //   editable: false,
-  //   sortable: false,
-  //   filterable: false,
-  //   renderCell: item => 
-  //     // <Avatar
-  //     // // key={item.row.manufacturer}
-  //     // src={require(`../data/images/cars/${item.row.manufacturer.toLowerCase()}.png`)}
-  //     // sx={{ width: 32, height: 28 }}
-  //     // />
-  //     <img
-  //             className="rounded-full h-10 w-12 hover:scale-125 delay-50 duration-500"
-  //             src={require(`../data/images/cars/${item.row.manufacturer.toLowerCase()}.png`)}
-  //             alt={item.row.manufacturer}
-  //             key={item.row.id}
-  //             item={item}
-  //           />
-      
-  //   },
-    {
-      field: "fullName",
-      headerName: "דגם יצרן",
-      description: "This column has a value getter and is not sortable.",
-      width: 180,
-      valueGetter: (params) =>
-      `${params.row.manufacturer || ""} ${params.row.model || ""}`,
-    },
-    {
-      field: "branch",
-      headerName: "סניף",
-      width: 120,
-      editable: false,
-    },
-    {
-      field: "gas",
-      headerName: "סוג דלק",
-      width: 120,
-      editable: false,
-    },
-    {
-      field: "status",
-      headerName: "סטטוס",
-      width: 120,
-      editable: false,
-    },
-    {
-      field: "lest_rteatment",
-      headerName: "טיפול אחרון",
-      width: 120,
-      editable: false,
-    },
-    {
-      field: "exp_ins",
-      headerName: "פקיעת ביטוח",
-      width: 120,
-      editable: false,
-    },
-  {
-    field: "finish_level",
-    headerName: "רמת גימור",
-    width: 120,
-    editable: false,
-  },
-  {
-    field: "year",
-    headerName: "שנתון",
-    width: 100,
-    editable: false,
-  },
-  {
-    field: "color",
-    headerName: "צבע",
-    width: 100,
-    editable: false,
-  },
-  {
-    type: 'number',
-    field: "km",
-    headerName: "ק''מ",
-    width: 80,
-    editable: false,
-  },
-];
 
 
 // Colors data
@@ -399,8 +64,30 @@ export const themeColors = [
   },
 ];
 
-
 // User profile
+// export const userProfileData = [
+//   {
+//     icon: <CgProfile />,
+//     title: 'אזור אישי',
+//     desc: 'הגדרות & מידע',
+//     iconColor: '#03C9D7',
+//     iconBg: '#E5FAFB',
+//   },
+//   {
+//     icon: <GoMailRead />,
+//     title: 'דואר נכנס',
+//     desc: 'הודעות & מיילים',
+//     iconColor: 'rgb(0, 194, 146)',
+//     iconBg: 'rgb(235, 250, 242)',
+//   },
+//   {
+//     icon: <FaTasks />,
+//     title: 'משימות',
+//     desc: 'תזכורות & מטלות',
+//     iconColor: 'rgb(255, 244, 229)',
+//     iconBg: 'rgb(254, 201, 15)',
+//   },
+// ];
 export const userProfileData = [
   {
     icon: <CgProfile />,
@@ -408,23 +95,11 @@ export const userProfileData = [
     desc: 'הגדרות & מידע',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
+    onClick:'user',
+    dataToRender:['name','user_name','company_role','email','address','phone_number','date_join'],
+    textToRender:['שם','שם משתמש','תפקיד','מייל','כתובת','טלפון','תאריך הצטרפות']
   },
-  {
-    icon: <GoMailRead />,
-    title: 'דואר נכנס',
-    desc: 'הודעות & מיילים',
-    iconColor: 'rgb(0, 194, 146)',
-    iconBg: 'rgb(235, 250, 242)',
-  },
-  {
-    icon: <FaTasks />,
-    title: 'משימות',
-    desc: 'תזכורות & מטלות',
-    iconColor: 'rgb(255, 244, 229)',
-    iconBg: 'rgb(254, 201, 15)',
-  },
-];
-
+  ]
 
 // chat data
 export const chatData = [
@@ -437,21 +112,21 @@ export const chatData = [
   },
   {
     image:
-      avatar3,
+      ofer,
     message: 'לקוח חדש נרשם',
     desc: 'אשר או דחה את ההצעה',
     time: '11:56',
   },
   {
     image:
-      avatar4,
+      yossi,
     message: 'פקיעת ביטוח',
     desc: 'לחדש ביטוחים לפני סוף החודש',
     time: '16:39',
   },
-  {
+  { 
     image:
-      elazar,
+      'https://drive.google.com/uc?id=1ZAoWsW3OcrjwaItLxWr8CPQr3q4OaCn9&export=download',
     message: 'עדכון מחירון',
     desc: 'לעדכן מחירונים בהקדם',
     time: '18:12',
@@ -459,182 +134,8 @@ export const chatData = [
 ];
 
 
-// form inputs for car adding
-export const formInputsCar = [
-    {
-      id: 1,
-      name: "manufacturer_en",
-      type: "text",
-      // placeholder: "יצרן",
-      label: "manufacturer",
-      tag: "input",
-    },
-    {
-      id: 20,
-      name: "manufacturer_hb",
-      type: "text",
-      // placeholder: "יצרן",
-      label: "יצרן",
-      tag: "input",
-    },
-    {
-      id: 2,
-      name: "model_en",
-      type: "text",
-      // placeholder: "דגם",
-      label: "model",
-      tag: "input",
-    },
-    {
-      id: 21,
-      name: "model_hb",
-      type: "text",
-      // placeholder: "דגם",
-      label: "דגם",
-      tag: "input",
-    },
-    {
-      id: 3,
-      name: "year",
-      type: "text",
-      // placeholder: "שנתון",
-      label: "שנתון",
-      tag: "input",
-    },
-    {
-      id: 4,
-      name: "color",
-      type: "text",
-      // placeholder: "צבע",
-      label: "צבע",
-      tag: "input",
-    },
-    {
-      id: 5,
-      name: "finish_level",
-      type: "text",
-      // placeholder: "רמת גימור",
-      label: "רמת גימור",
-      tag: "input",
-    },
-    {
-      id: 6,
-      name: "km",
-      type: "number",
-      // placeholder: "ק''מ",
-      label: "ק''מ",
-      tag: "input",
-    },
-    {
-      id: 7,
-      name: "status",
-      type: "text",
-      // placeholder: "סטטוס",
-      label: "סטטוס",
-      tag: "input",
-    },
-    {
-      id: 8,
-      name: "branch",
-      type: "text",
-      // placeholder: "סניף",
-      label: "סניף",
-      tag: "input",
-    },
-    {
-      id: 9,
-      name: "fuel_type",
-      type: "text",
-      // placeholder: "סוג דלק",
-      label: "סוג דלק",
-      tag: "input",
-    },
-    {
-      id: 10,
-      name: "exp_test",
-      type: "date",
-      // placeholder: "תוקף טסט",
-      label: "תוקף טסט",
-      tag: "input",
-    },
-    {
-      id: 11,
-      name: "exp_ins",
-      type: "date",
-      // placeholder: "תוקף ביטוח",
-      label: "תוקף ביטוח",
-      tag: "input",
-    },
-    {
-      id: 12,
-      name: "last_treatment",
-      type: "date",
-      // placeholder: "טיפול אחרון",
-      label: "טיפול אחרון",
-      tag: "input",
-    },
-    {
-      id: 13,
-      name: "km_next_treatment",
-      type: "number",
-      // placeholder: "ק''מ טיפול הבא",
-      label: "ק''מ טיפול הבא",
-      tag: "input",
-    },
-    {
-      id: 14,
-      name: "date_next_treatment",
-      type: "date",
-      // placeholder: "תאריך טיפול הבא",
-      label: "תאריך טיפול הבא",
-      tag: "input",
-    },
-    {
-      id: 15,
-      name: "tag",
-      type: "text",
-      // placeholder: "דירוג",
-      label: "דירוג",
-      tag: "input",
-    },
-    {
-      id: 16,
-      name: "deductible",
-      type: "number",
-      // placeholder: "השתתפות עצמית",
-      label: "השתתפות עצמית",
-      tag: "input",
-    },
-    {
-      id: 17,
-      name: "coder",
-      type: "text",
-      // placeholder: "קודנית",
-      label: "קודנית",
-      tag: "input",
-    },
-    {
-      id: 18,
-      name: "added_by",
-      type: "string",
-      // placeholder: "הוקם ע''י",
-      label: "הוקם ע''י",
-      tag: "input",
-    },
-    {
-      id: 19,
-      name: "year",
-      type: "date",
-      // placeholder: "שנתון",
-      label: "שנתון",
-      tag: "input",
-    },
-    {
-      id: 22,
-      name: "date_join",
-      type: "date",
-      // placeholder: "שנתון",
-      label: "הוקם בתאריך",
-      tag: "input",
-    },
-];
+
+
+
+
+

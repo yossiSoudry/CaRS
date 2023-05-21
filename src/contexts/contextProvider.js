@@ -1,39 +1,59 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 
 const StateContext = createContext();
 
-const initialState = {
+const initialModals = {
   userProfile: false,
   notification: false,
-  addCar:false,
 };
 
 export const ContextProvider = ({ children }) => {
-  // Holds the current screen size.
-  const [screenSize, setScreenSize] = useState(undefined);
-  // Holds the current color.
-  const [currentColor, setCurrentColor] = useState(localStorage.colorMode);
-  // Holds the current mode - dark ol light.
-  const [currentMode, setCurrentMode] = useState(localStorage.themeMode);
-
+  // Responsive
+  const [displayLines, setDisplayLines] = useState(true);
+  // Design
+  const [lineSpacing, setLineSpacing] = useState(
+    Number(localStorage.lineSpacing) || 2
+  );
+  const [stickyRight, setStickyRight] = useState(
+    Number(localStorage.stickyRight) || 1
+  );
+  const [stickyLeft, setStickyLeft] = useState(
+    Number(localStorage.stickyLeft) || 1
+  );
+  const [refresh, setRefresh] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  // Holds and sets the current color.
+  const [currentColor, setCurrentColor] = useState(
+    localStorage.colorMode || "#727cf5"
+  );
+  // Holds and sets the current mode - dark ol light.
+  const [currentMode, setCurrentMode] = useState(
+    localStorage.themeMode || "dark"
+  );
+  // Holds and sets the current language.
   const [currentLanguage, setCurrentLanguage] = useState("Hebrew");
-  // Holds the sidebar Status - open or close.
+  // Holds and sets the sidebar Status - open or close.
   const [openSidebar, setOpenSidebar] = useState(true);
+  // Holds and sets the modals status, open or close.
+  const [isModalOpen, setIsModalOpen] = useState(initialModals);
+  // Handle the user details.
+  const [user, setUser] = useState(null);
+  // Handle the click on a close button of the modals
+  const handleCloseModal = (clicked) =>
+    setIsModalOpen({ ...initialModals, [clicked]: true });
+  // Holds and sets the current screen size.
+  const [screenSize, setScreenSize] = useState(undefined);
+  // פונקציית שאילתא המעדכנת את סקרינסייז בהתאם לרוחב המסך הנוכחי
+  const updateSize = () => setScreenSize(window.innerWidth);
 
-  const [isClicked, setIsClicked] = useState(initialState);
+  const [refreshAlerts, setRefreshAlerts] = useState(false);
 
-  const theme = createTheme();
-
-  // Gets the event of resizing the screen width and handle it.
   useEffect(() => {
-    // פונקציית שאילתא המעדכנת את סקרינסייז בהתאם לרוחב המסך הנוכחי
-    const updateSize = () => setScreenSize(window.innerWidth);
     // האזנה לאירוע שינוי רוחב המסך וקריאה לשאילתא
     window.addEventListener("resize", updateSize);
     // (did mount)קריאה לפונקציית השאילתא בעת אתחול
     updateSize();
-    // מבטל האזנה לאירוע
+    // מבטל האזנה לאירוע בעת סגירת הקומפוננטה
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
@@ -45,40 +65,41 @@ export const ContextProvider = ({ children }) => {
       setOpenSidebar(true);
     }
   }, [screenSize]);
-  
-
-  const setMode = (e) => {
-    setCurrentMode(e.target.value);
-    theme.palette.mode = e.target.value;
-    localStorage.setItem("themeMode", e.target.value);
-  };
-
-  const setColor = (color) => {
-    setCurrentColor(color);
-    localStorage.setItem("colorMode", color);
-  };
-
-  const handleClick = (clicked) => setIsClicked({ ...initialState, [clicked]: true });
 
   return (
     <StateContext.Provider
       value={{
         currentColor,
+        setCurrentColor,
         currentMode,
+        setCurrentMode,
         openSidebar,
+        setOpenSidebar,
         screenSize,
         setScreenSize,
-        handleClick,
-        isClicked,
-        initialState,
-        setIsClicked,
+        handleCloseModal,
+        isModalOpen,
+        setIsModalOpen,
+        initialModals,
         setOpenSidebar,
-        setCurrentColor,
-        setCurrentMode,
-        setMode,
-        setColor,
         currentLanguage,
         setCurrentLanguage,
+        user,
+        setUser,
+        isLoading,
+        setIsLoading,
+        refresh,
+        setRefresh,
+        lineSpacing,
+        setLineSpacing,
+        stickyRight,
+        setStickyRight,
+        stickyLeft,
+        setStickyLeft,
+        displayLines,
+        setDisplayLines,
+        refreshAlerts,
+        setRefreshAlerts,
       }}
     >
       {children}

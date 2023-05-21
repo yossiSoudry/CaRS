@@ -18,29 +18,13 @@ module.exports = {
       borderWidth: {
         1: '1px',
       },
+      width: {
+        120: '31rem',
+      },
       borderColor: {
         color: 'rgba(2, 28, 9, 0.2)',
       },
-      width: {
-        400: '400px',
-        760: '760px',
-        780: '780px',
-        800: '800px',
-        1000: '1000px',
-        1200: '1200px',
-        1400: '1400px',
-      },
-      height: {
-        80: '80px',
-      },
-      minHeight: {
-        590: '590px',
-      },
-      backgroundImage: {
-        'hero-pattern':
-          "url('https://i.ibb.co/MkvLDfb/Rectangle-4389.png')",
-      },
     },
   },
-  plugins: [],
+  // plugins: [],
 };
