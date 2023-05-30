@@ -11,6 +11,7 @@ export const TableContext = ({ children, values, setValues }) => {
   const [openForm, setOpenForm] = useState(false);
   const [highPageNum, setHighPageNum] = useState(0);
   const [items, setItems] = useState(limitForReq);
+  const [sortBy, setSortBy] = useState("");
 
   return (
     <StateTableContext.Provider
@@ -29,6 +30,8 @@ export const TableContext = ({ children, values, setValues }) => {
         setHighPageNum,
         items,
         setItems,
+        sortBy,
+        setSortBy,
       }}
     >
       {children}
