@@ -1,6 +1,5 @@
 import { CgProfile } from 'react-icons/cg';
-import { GoMailRead } from 'react-icons/go';
-import { FaTasks } from 'react-icons/fa';
+import { VscChecklist } from 'react-icons/vsc';
 import elazar from './images/try/elazar.png';
 import yossi from "./images/try/yossi.jpeg";
 import ofer from "./images/try/ofer.jpeg";
@@ -23,7 +22,7 @@ import ofer from "./images/try/ofer.jpeg";
 // ]
 
 // export const carObjDateSearch = [
-//   ["last_treatment", "טיפןל אחרון"],
+//   ["last_treatment", "טיפול אחרון"],
 //   ["date_join", "תאריך הצטרפות"],
 //   ["exp_test", "תאריך טסט אחרון"],
 //   ["date_next_treatment", "תאריך הטיפול הבא"],
@@ -65,6 +64,29 @@ export const themeColors = [
 ];
 
 // User profile
+// export const userProfileData = [
+//   {
+//     icon: <CgProfile />,
+//     title: 'אזור אישי',
+//     desc: 'הגדרות & מידע',
+//     iconColor: '#03C9D7',
+//     iconBg: '#E5FAFB',
+//   },
+//   {
+//     icon: <GoMailRead />,
+//     title: 'דואר נכנס',
+//     desc: 'הודעות & מיילים',
+//     iconColor: 'rgb(0, 194, 146)',
+//     iconBg: 'rgb(235, 250, 242)',
+//   },
+//   {
+//     icon: <FaTasks />,
+//     title: 'משימות',
+//     desc: 'תזכורות & מטלות',
+//     iconColor: 'rgb(255, 244, 229)',
+//     iconBg: 'rgb(254, 201, 15)',
+//   },
+// ];
 export const userProfileData = [
   {
     icon: <CgProfile />,
@@ -72,22 +94,21 @@ export const userProfileData = [
     desc: 'הגדרות & מידע',
     iconColor: '#03C9D7',
     iconBg: '#E5FAFB',
+    onClick:'user',
+    dataToRender:['name','user_name','company_role','email','address','phone_number','date_join'],
+    textToRender:['שם','שם משתמש','תפקיד','מייל','כתובת','טלפון','תאריך הצטרפות']
   },
   {
-    icon: <GoMailRead />,
-    title: 'דואר נכנס',
-    desc: 'הודעות & מיילים',
-    iconColor: 'rgb(0, 194, 146)',
-    iconBg: 'rgb(235, 250, 242)',
-  },
-  {
-    icon: <FaTasks />,
+    icon: <VscChecklist />,
     title: 'משימות',
-    desc: 'תזכורות & מטלות',
-    iconColor: 'rgb(255, 244, 229)',
-    iconBg: 'rgb(254, 201, 15)',
+    desc: 'משימות & פגישות',
+    iconColor: '#03C9D7',
+    iconBg: '#E5FAFB',
+    onClick:'mission',
+    dataToRender:['Date_added','title','time_to_do','mission','remarks','importance'],
+    textToRender:['נוספה בתאריך','כותרת','זמן לביצוע','משימה','דגשים','דחיפות']
   },
-];
+  ]
 
 // chat data
 export const chatData = [
