@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+@import url("https://cdn.syncfusion.com/ej2/material.css");
+
+:root {
+  --current-color: black;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  direction: rtl;
+}
+
+@media only screen and (max-width: 600px) {
+  body > div:nth-child(3)
+  , body > div:nth-child(4)
+  , body > div:nth-child(5)
+{
+  display: none !important;
+}
+}
+@media (min-width: 600px) {
+body > div:nth-child(4)
+, body > div:nth-child(5)
+{
+  display: none !important;
+}
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+  color: white;
+  background: var(--current-color);
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 10px !important;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--current-color);
+  border-radius: 10px;
+}
+.ant-upload-list-item :hover {
+  transform: scale(1.1);
+  color: var(--current-color);
+}
+.ant-select-selector {
+  color: rgb(131, 131, 131) !important;
+}
+.ant-select-arrow {
+  color: rgb(131, 131, 131) !important;
+  padding-top: 12px;
+}
+/* .anticon-close {
+  color: rgb(131, 131, 131);
+  font-size: medium;
+  top: 6px;
+} */
+.css-dev-only-do-not-override-htwhyh .ant-btn-primary{
+  background-color: var(--current-color) !important;
+}
+.ant-modal-content {
+  padding: 0 !important;
+}
+.ant-modal-title {
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem !important;
+  padding-top: 10px !important;
+  color: var(--current-color);
+}
+.ant-modal-footer {
+  padding: 10px !important;
+}
+/* .ant-modal-close-x {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 1.5rem !important;
+} */
+.anticon-close {
+  color: var(--current-color) !important;
+}
+input[type="number"]::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  margin: 0;
+}
+::-webkit-calendar-picker-indicator {
+  filter: invert(0.6);
+}
