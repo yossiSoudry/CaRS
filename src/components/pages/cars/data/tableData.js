@@ -1,7 +1,6 @@
 export const carsColumnsData = [
 
     {
-      id: 1,
       title: "דגם ויצרן",
       col: "main",
       lines: 2,
@@ -10,7 +9,6 @@ export const carsColumnsData = [
       type: "text",
     },
     {
-      id: 2,
       title: "מס' רישוי",
       col: "titles",
       value: ["license_number"],
@@ -18,9 +16,8 @@ export const carsColumnsData = [
       type: "text",
     },
     {
-      id: 15,
       title: "קטגוריה",
-      col: "badge",
+      col: "dot",
       value: "class",
       editable:true,
       type: "select",
@@ -28,7 +25,6 @@ export const carsColumnsData = [
       colors: ["green", "emerald", "teal", "cyan","sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink"]
     },
     {
-      id: 3,
       title: "סניף",
       col: "simple",
       value: ["branch"],
@@ -37,63 +33,6 @@ export const carsColumnsData = [
       option: ["בני ברק", "קריית שמונה", "תל אביב-יפו", "עפולה"]
     },
     {
-      id: 4,
-      title: "סוג דלק",
-      col: "simple",
-      value: ["fuel_type"],
-      editable: false,
-      type: "text",
-    },
-    {
-      id: 7,
-      title: "טיפול אחרון",
-      col: "simple",
-      value: ["last_treatment"],
-      editable:true,
-      type: "date",
-    },
-    {
-      id: 13,
-      title: "טיפול הבא",
-      col: "simple",
-      value: ["km_next_treatment"],
-      editable:true,
-      type: "select",
-    },
-    {
-      id: 8,
-      title: "פקיעת ביטוח",
-      col: "calc-date",
-      value: ["exp_ins"],
-      editable:true,
-      type: "date",
-    },
-    {
-      id: 9,
-      title: "רמת גימור",
-      col: "simple",
-      value: ["finish_level"],
-      editable: false,
-      type: "text",
-    },
-    {
-      id: 10,
-      title: "שנתון",
-      col: "simple",
-      value: ["year"],
-      editable: false,
-      type: "text",
-    },
-    {
-      id: 11,
-      title: "צבע",
-      col: "simple",
-      value: ["color"],
-      editable:true,
-      type: "text",
-    },
-    {
-      id: 12,
       title: "ק''מ",
       col: "simple",
       value: ["km"],
@@ -101,15 +40,64 @@ export const carsColumnsData = [
       type: "number",
     },
     {
-      id: 14,
-      title: "תיבת הילוכים",
+      title: "טיפול הבא",
       col: "simple",
+      value: ["km_next_treatment"],
+      lines: 2,
+      editable:true,
+      type: "number",
+    },
+    {
+      title: "פקיעת ביטוח",
+      col: "calc-date",
+      value: ["exp_ins"],
+      editable:true,
+      type: "date",
+    },
+    {
+      title: "פקיעת טסט",
+      col: "calc-date",
+      value: ["exp_test"],
+      editable:true,
+      type: "date",
+    },
+    {
+      title: "סוג דלק",
+      col: "simple",
+      value: ["fuel_type"],
+      editable: false,
+      type: "text",
+    },
+    {
+      title: "רמת גימור",
+      col: "simple",
+      value: ["finish_level"],
+      editable: false,
+      type: "text",
+    },
+    {
+      title: "שנתון",
+      col: "simple",
+      value: ["year"],
+      editable: false,
+      type: "text",
+    },
+    {
+      title: "צבע",
+      col: "simple",
+      value: ["color"],
+      editable:true,
+      type: "text",
+    },
+    {
+      title: "תיבת הילוכים",
+      col: "select",
       value: ["gearbox"],
       editable:true,
       type: "select",
+      option: ["אוטומט", "רובוטי", "ידני"]
     },
     {
-      id: 5,
       title: "סטטוס",
       col: "badge",
       value: "status",
@@ -119,7 +107,6 @@ export const carsColumnsData = [
       colors: ["green", "purple", "red", "yellow", 'gray']
     },
     {
-      id: 6,
       title: "פעולות",
       col: "actions",
       files: true,
@@ -148,7 +135,7 @@ export const carsColumnsData = [
   // ]
   
   export const carObjDateSearch = [
-    ["last_treatment", "טיפןל אחרון"],
+    ["last_treatment", "טיפול אחרון"],
     ["date_join", "תאריך הצטרפות"],
     ["exp_test", "תאריך טסט אחרון"],
     ["date_next_treatment", "תאריך הטיפול הבא"],

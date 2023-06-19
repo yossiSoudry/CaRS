@@ -1,0 +1,175 @@
+export const carsColumnsData = [
+
+    {
+      title: "דגם ויצרן",
+      col: "main",
+      lines: 2,
+      value: ["cars", ["manufacturer_en", "model_en"], ["manufacturer_hb", 'model_hb']],
+      editable: false,
+      type: "text",
+    },
+    {
+      title: "מס' רישוי",
+      col: "titles",
+      value: ["license_number"],
+      editable: false,
+      type: "text",
+    },
+    {
+      title: "סניף",
+      col: "simple",
+      value: ["branch"],
+      editable:true,
+      type: "select",
+      option: ["בני ברק", "קריית שמונה", "תל אביב-יפו", "עפולה"]
+    },
+    {
+      title: "פקיעת ביטוח",
+      col: "calc-date",
+      value: ["exp_ins"],
+      editable:true,
+      type: "date",
+    },
+    {
+      title: "כיסוי ביטוחי",
+      col: "simple",
+      value: ["insurance_coverage"],
+      editable:true,
+      type: "date",
+    },
+    {
+      title: "גיל התחלתי",
+      col: "simple",
+      value: ["minimum_age"],
+      editable:true,
+      type: "date",
+    },
+    {
+      title: "ותק התחלתי",
+      col: "simple",
+      value: ["minimum_seniority"],
+      editable:true,
+      type: "date",
+    },
+    {
+      title: "הקמת פוליסה",
+      col: "simple",
+      value: ["date_policy_insurance"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "פרמיית חובה",
+      col: "simple",
+      value: ["mandatory_premium_amount"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "אופן תש' חובה",
+      col: "simple",
+      value: ["mandatory_payment_method"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "מס' תש' חובה",
+      col: "simple",
+      value: ["compulsory_payment_arrangement"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "פרמיית מקיף",
+      col: "simple",
+      value: ["third_party_premium_amount"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "אופן תש' מקיף",
+      col: "simple",
+      value: ["third_party_payment_method"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "מס' תש' מקיף",
+      col: "simple",
+      value: ["third_party_payment_deployment"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "אקסס",
+      col: "simple",
+      value: ["access_amount"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "קולקטיב",
+      col: "simple",
+      value: ["collective"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "שנתון",
+      col: "simple",
+      value: ["year"],
+      editable: true,
+      type: "text",
+    },
+    {
+      title: "רמת גימור",
+      col: "simple",
+      value: ["finish_level"],
+      editable: false,
+      type: "text",
+    },
+    {
+      title: "סטטוס",
+      col: "badge",
+      value: "status",
+      editable:true,
+      type: "select",
+      option: ["פנוי", "השכרה", "מוסך", "מושבת", "נמכר"],
+      colors: ["green", "purple", "red", "yellow", 'gray']
+    },
+    {
+      title: "פעולות",
+      col: "actions",
+      files: true,
+      location: true,
+      value: "",
+      editable: false,
+      type: "icon",
+    },
+  ];
+
+  // export const carObjSearch = [
+  //   ["branch", "סניף"],
+  //   ["class", "דרגה"],
+  //   ["color", "צבע"],
+  //   ["deductible", "שנה"],
+  //   ["finish_level", "רמת גימור"],
+  //   ["fuel_type", "סוג דלק"],
+  //   ["km", "קמ"],
+  //   ["license_number", "מספר רכב"],
+  //   ["manufacturer_en", "שם החברה באנגלית"],
+  //   ["manufacturer_hb", "שם החברה בעברית"],
+  //   ["model_en", "דגם באנגלית"],
+  //   ["model_hb", "דגם בעברית"],
+  //   ["status", "סטטוס"],
+  //   ["year", "שנה"]
+  // ]
+  
+  export const carObjDateSearch = [
+    ["last_treatment", "טיפול אחרון"],
+    ["date_join", "תאריך הצטרפות"],
+    ["exp_test", "תאריך טסט אחרון"],
+    ["date_next_treatment", "תאריך הטיפול הבא"],
+    ["exp_ins", "פקיעת ביטוח"]
+  ]
+  

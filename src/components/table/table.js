@@ -1,7 +1,5 @@
-import { useEffect, useState, useRef } from "react";
-import { RiPlayListAddLine } from "react-icons/ri";
+import { useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
-import { Modal } from "antd";
 import { useStateContext } from "../../contexts/contextProvider";
 import { URL } from "../../data/constants";
 import Tr from "./tr";
@@ -11,8 +9,6 @@ import Tbody from "./tbody";
 import Loading from "./loading/loading";
 import Pagination from "./pagination/paginationComp";
 import SearchComp from "./search/searchComp";
-import DoButton from "../buttons/doButton";
-import AddForm from "../forms/addForm";
 import { TableContext } from "../../contexts/tableContext";
 
 const Table = ({ rows, columns, titles, setRow, setData, search, form }) => {
@@ -22,8 +18,6 @@ const Table = ({ rows, columns, titles, setRow, setData, search, form }) => {
   const {
     screenSize,
     isLoading,
-    currentColor,
-    currentMode,
     openSidebar,
     displayLines,
     setDisplayLines,
@@ -35,14 +29,6 @@ const Table = ({ rows, columns, titles, setRow, setData, search, form }) => {
     sortBy,
     setSortBy,
   } = useStateContext();
-  // Pagination
-  // const [pageNum, setPageNum] = useState(1);
-
-  // const [limitForReq, setLimitForReq] = useState(localStorage.limitForReq || 10);
-
-  // const [reverse, setReverse] = useState(false);
-  // Modal
-  const [openForm, setOpenForm] = useState(false);
 
   // For loading
   const rowLoading = [
@@ -89,7 +75,7 @@ const Table = ({ rows, columns, titles, setRow, setData, search, form }) => {
       : column.col === "titles" && stickyRight > 1
       ? "sticky right-[180px] bg-gray-100 dark:bg-zinc-600"
       : column.col === "badge" && stickyLeft > 1
-      ? "sticky left-0 bg-gray-100 dark:bg-zinc-600"
+      ? "sticky left-[100px] bg-gray-100 dark:bg-zinc-600"
       : column.col === "actions" && stickyLeft > 0
       ? "sticky left-0 bg-gray-100 dark:bg-zinc-600"
       : "";
@@ -109,7 +95,7 @@ const Table = ({ rows, columns, titles, setRow, setData, search, form }) => {
 
   return (
     <TableContext values={form[0]} setValues={form[1]}>
-      <div className="md:flex justify-between items-end">
+      <div className="lg:flex justify-between items-end">
         <Toolbar
           handlePrint={handlePrint}
           rows={rows}
@@ -117,50 +103,22 @@ const Table = ({ rows, columns, titles, setRow, setData, search, form }) => {
           handleLineSpacing={handleLineSpacing}
           handleStickyRight={handleStickyRight}
           handleStickyLeft={handleStickyLeft}
+          form={form}
+          titles={titles}
+          targetURL={targetURL}
         />
-        {form && (
-          <div className="flex justify-center delay-50 duration-500">
-            <DoButton
-              color={currentColor}
-              title={`הוספת ${titles[1]}`}
-              size="4xl"
-              icon={
-                <RiPlayListAddLine
-                  onClick={() => {
-                    setOpenForm(true);
-                  }}
-                />
-              }
-            />
-            <Modal
-              centered
-              open={openForm}
-              onOk={() => setOpenForm(false)}
-              onCancel={() => setOpenForm(false)}
-              width={1120}
-              footer={null}
-              className={currentMode === "dark" ? "dark" : "light"}
-            >
-              <AddForm
-                formInputs={form[2]}
-                cleanValues={form[3]}
-                FormFunc={form[4]}
-                setOpenForm={setOpenForm}
-                url={targetURL}
-                title={titles[1]}
-              />
-            </Modal>
-          </div>
+        {search && (
+          <SearchComp
+            columns={columns}
+            keys={search[0]}
+            keysDate={search[1]}
+            fixData={search[2]}
+            setData={setData}
+            url={targetURL}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+          />
         )}
-        <SearchComp
-          keys={search[0]}
-          keysDate={search[1]}
-          fixData={search[2]}
-          setData={setData}
-          url={targetURL}
-          sortBy={sortBy}
-          setSortBy={setSortBy}
-        />
       </div>
       {displayLines ? (
         <div className="shadow dark:shadow-xl border border-neutral-200 dark:border-neutral-800 max-h-[calc(100vh-29vh)] overflow-auto scroll-smooth rounded-lg m-2">
@@ -203,7 +161,7 @@ const Table = ({ rows, columns, titles, setRow, setData, search, form }) => {
           )}
         </div>
       )}
-      <Pagination url={targetURL} rows={rows} />
+      {search && <Pagination url={targetURL} rows={rows} />}
     </TableContext>
   );
 };

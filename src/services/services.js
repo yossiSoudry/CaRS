@@ -54,6 +54,9 @@ const apiGet = async (url, body) => {
     });
     return data;
   } catch (err) {
+    if(err.response.data.msg === "Token invalid or expired"){
+    url !== 'https://faithful-tan-cape.cyclic.app/workers/workerInfo' && window.location.reload()
+    }
     const codeErr = errMsg(err.response.status) || "";
     loadingMsg(codeErr + "היבוא נכשל!", "red", "error");
     console.log(err);
@@ -73,6 +76,9 @@ const apiPost = async (url, body) => {
     loading("העדכון בוצע!", "green", "success");
     return data;
   } catch (err) {
+    if(err.response.data.msg === "Token invalid or expired"){
+    window.location.reload()
+    }
     const codeErr = errMsg(err.response.status) || "";
     loadingMsg(codeErr + "העדכון נכשל!", "red", "error");
     console.log(err);
@@ -92,6 +98,9 @@ const apiPut = async (url, body) => {
     loading("העדכון בוצע!", "green", "success");
     return data;
   } catch (err) {
+    if(err.response.data.msg === "Token invalid or expired"){
+      window.location.reload()
+      }
     const codeErr = errMsg(err.response.status) || "";
     loadingMsg(codeErr + "העדכון נכשל!", "red", "error");
     console.log(err);
@@ -99,6 +108,7 @@ const apiPut = async (url, body) => {
   }
 };
 const apiDelete = async (url, body) => {
+  console.log(url);
   try {
     let { data } = await axios({
       method: "DELETE",
@@ -110,6 +120,9 @@ const apiDelete = async (url, body) => {
     });
     return data;
   } catch (err) {
+    if(err.response.data.msg === "Token invalid or expired"){
+      window.location.reload()
+      }
     console.log(err);
     throw err;
   }
@@ -127,6 +140,9 @@ const apiPatch = async (url, body) => {
     loading("העדכון בוצע!", "green", "success");
     return data;
   } catch (err) {
+    if(err.response.data.msg === "Token invalid or expired"){
+      window.location.reload()
+      }
     const codeErr = errMsg(err.response.status) || "";
     loadingMsg(codeErr + "העדכון נכשל!", "red", "error");
     console.log(err);

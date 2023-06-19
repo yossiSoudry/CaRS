@@ -18,16 +18,6 @@ export const carsColumnsData = [
       type: "text",
     },
     {
-      id: 15,
-      title: "קטגוריה",
-      col: "badge",
-      value: "class",
-      editable:true,
-      type: "select",
-      option: ["A - מיני", "B - סופר מיני", "C - חצי משפחתי", "D - משפחתי", "E - משפחתי משודרג", "F - ג'יפון", 'G - מיני וואן', 'H - מיני וואן משודרג', 'I - וואן', 'J - מסחרי', 'K - מנהלים'],
-      colors: ["green", "emerald", "teal", "cyan","sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink"]
-    },
-    {
       id: 3,
       title: "סניף",
       col: "simple",
@@ -37,43 +27,33 @@ export const carsColumnsData = [
       option: ["בני ברק", "קריית שמונה", "תל אביב-יפו", "עפולה"]
     },
     {
-      id: 4,
-      title: "סוג דלק",
+      title: "פקיעת טסט",
+      col: "calc-date",
+      value: ["exp_test"],
+      editable:true,
+      type: "date",
+    },
+    {
+      title: "טסט קודם",
+      col: "calc-date",
+      value: ["last_test_date"],
+      editable:true,
+      type: "date",
+    },
+    {
+      id: 10,
+      title: "אגרת רישוי",
       col: "simple",
-      value: ["fuel_type"],
-      editable: false,
+      value: ["license_fee"],
+      editable: true,
       type: "text",
     },
     {
-      id: 7,
-      title: "טיפול אחרון",
+      id: 10,
+      title: "תשלום אגרה",
       col: "simple",
-      value: ["last_treatment"],
-      editable:true,
-      type: "date",
-    },
-    {
-      id: 13,
-      title: "טיפול הבא",
-      col: "simple",
-      value: ["km_next_treatment"],
-      editable:true,
-      type: "select",
-    },
-    {
-      id: 8,
-      title: "פקיעת ביטוח",
-      col: "calc-date",
-      value: ["exp_ins"],
-      editable:true,
-      type: "date",
-    },
-    {
-      id: 9,
-      title: "רמת גימור",
-      col: "simple",
-      value: ["finish_level"],
-      editable: false,
+      value: ["fee_paid"],
+      editable: true,
       type: "text",
     },
     {
@@ -99,14 +79,6 @@ export const carsColumnsData = [
       value: ["km"],
       editable:true,
       type: "number",
-    },
-    {
-      id: 14,
-      title: "תיבת הילוכים",
-      col: "simple",
-      value: ["gearbox"],
-      editable:true,
-      type: "select",
     },
     {
       id: 5,
@@ -147,7 +119,7 @@ export const carsColumnsData = [
   // ]
   
   export const carObjDateSearch = [
-    ["last_treatment", "טיפןל אחרון"],
+    ["last_treatment", "טיפול אחרון"],
     ["date_join", "תאריך הצטרפות"],
     ["exp_test", "תאריך טסט אחרון"],
     ["date_next_treatment", "תאריך הטיפול הבא"],

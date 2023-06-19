@@ -43,7 +43,7 @@ const Files = ({ row, updateOne }) => {
     axios
       .post("https://api.cloudinary.com/v1_1/donev6ews/image/upload", formData)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         let data = {
           name: response.data.original_filename,
           url: response.data.secure_url,
@@ -74,7 +74,7 @@ const Files = ({ row, updateOne }) => {
 
   const deleteRequest = (file) => {
     let type = file.url.substring(file.url.lastIndexOf(".") + 1);
-    console.log(type);
+    // console.log(type);
     if (type !== "pdf") {
       row.images.map((image, i) => {
         if (image.name === file.name) {

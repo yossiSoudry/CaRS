@@ -73,7 +73,7 @@ const UploadWidget = ({setOpen , open , setChanging}) => {
           headers: { "x-api-key": localStorage[API_KEY] },
           data: { img_url },
         });
-        console.log(data);
+        // console.log(data);
         
         if(data.modifiedCount){
           setOpen(false);

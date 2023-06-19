@@ -38,7 +38,6 @@ const Dashboard = () => {
           <Pie />
         </div>
       <TableDashboard />
-      
     </div>
   );
 };

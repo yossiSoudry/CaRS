@@ -8,9 +8,13 @@ import Orders from "../components/pages/orders/orders";
 import Users from "../components/pages/users/users";
 import Cars from "../components/pages/cars/cars";
 import Tests from "../components/pages/tests/tests";
+import Insurance from "../components/pages/insurance/insurance";
+import Treatments from "../components/pages/treatments/treatments";
+import Drivers from "../components/pages/drivers/drivers";
 import Pricing from "../components/pages/pricing/pricing";
-import App from "../components/pages/cardUsers";
 import AddForm from "../components/forms/addForm";
+import Mission from "../components/pages/missions/missions";
+import PricingManagement from "../components/pages/pricingManagement/pricingManagement";
 
 const AppRoutes = () => {
 
@@ -20,17 +24,21 @@ const AppRoutes = () => {
     <div>
       <Routes>
         {user.role === "admin" && <Route path="/users" element={<Users />} /> }
+        {user.role === "admin" && <Route path="/missions" element={<Mission />} /> }
+        {user.role === "admin" && <Route path="/pricingManagement" element={<PricingManagement />} /> }
         <Route path="/" element={<Dashboard />} />
         <Route path="/*" element={<Dashboard />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/cars" element={<Cars />} />
         <Route path="/tests" element={<Tests />} />
+        <Route path="/insurance" element={<Insurance />} />
+        <Route path="/treatments" element={<Treatments />} />
         <Route path="/pricing" element={<Pricing/>} />
         <Route path="/customers" element={<Customers />} />
+        <Route path="/drivers" element={<Drivers />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/cars/addCarForm" element={<AddForm />} />
-        <Route path="select" element={<App />} />
       </Routes>
     </div>
   );

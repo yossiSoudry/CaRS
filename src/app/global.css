@@ -12,16 +12,30 @@ body {
   direction: rtl;
 }
 
-body > div:nth-child(4)
-, body > div:nth-child(5)
-/* , body > div:nth-child(6) */
+/* @media only screen and (max-width: 600px) {
+  body > div:nth-child(3)
+  , body > div:nth-child(4)
+  , body > div:nth-child(5)
 {
   display: none !important;
 }
+}
+@media (min-width: 600px) {
+body > div:nth-child(4)
+, body > div:nth-child(5)
+{
+  display: none !important;
+}
+} */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::selection {
+  color: white;
+  background: var(--current-color);
+}
 
 ::-webkit-scrollbar {
   width: 0;

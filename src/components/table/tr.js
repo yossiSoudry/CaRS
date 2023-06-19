@@ -22,7 +22,6 @@ export default function Tr({ row, columns, space, setRow, stickyRight, stickyLef
   const updateOne = async () => {
     let newRow = row;
     setRow(newRow);
-    console.log(row);
   };
 
   return (

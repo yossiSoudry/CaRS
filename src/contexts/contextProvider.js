@@ -14,6 +14,8 @@ export const ContextProvider = ({ children }) => {
   const [lineSpacing, setLineSpacing] = useState(
     Number(localStorage.lineSpacing) || 2
   );
+  const [refreshMission, setRefreshMission] = useState(false);
+  const [missionData, setMissionData] = useState([]);
   const [stickyRight, setStickyRight] = useState(
     Number(localStorage.stickyRight) || 1
   );
@@ -28,7 +30,11 @@ export const ContextProvider = ({ children }) => {
   );
   // Holds and sets the current mode - dark ol light.
   const [currentMode, setCurrentMode] = useState(
-    localStorage.themeMode || "dark"
+    localStorage.themeMode === "dark" ||
+      (!("themeMode" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ? "dark"
+      : "light"
   );
   // Holds and sets the current language.
   const [currentLanguage, setCurrentLanguage] = useState("Hebrew");
@@ -100,6 +106,10 @@ export const ContextProvider = ({ children }) => {
         setDisplayLines,
         refreshAlerts,
         setRefreshAlerts,
+        missionData,
+        setMissionData,
+        refreshMission,
+        setRefreshMission,
       }}
     >
       {children}

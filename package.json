@@ -20,12 +20,14 @@
     "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
+    "react-indiana-drag-scroll": "^2.2.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
-    "react-snap-carousel": "^0.3.2",
+    "react-snap-": "^0.3.2",
     "react-spring": "^9.7.1",
     "react-to-print": "^2.14.12",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "xml2js": "^0.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,10 +1,10 @@
 import { AiOutlineCalendar, AiOutlineShoppingCart, AiFillCar, AiOutlineInsurance } from 'react-icons/ai';
 import { FiShoppingBag, FiEdit, FiSettings } from 'react-icons/fi';
 import { SiSpeedtest } from 'react-icons/si';
-import { BsKanban } from 'react-icons/bs';
-import { BiColorFill } from 'react-icons/bi';
-import { RiContactsLine, RiAdminLine } from 'react-icons/ri';
-import { MdOutlinePriceChange } from 'react-icons/md';
+import { BsTools } from 'react-icons/bs';
+import { VscChecklist } from 'react-icons/vsc';
+import { RiContactsLine, RiAdminLine, RiListSettingsLine } from 'react-icons/ri';
+import { MdOutlinePriceChange, MdPeopleOutline } from 'react-icons/md';
 
 // Menu data
 export const links = [
@@ -28,11 +28,6 @@ export const links = [
           icon: <AiFillCar />,
         },
         {
-          name: 'orders',
-          hebrew: 'הזמנות',
-          icon: <AiOutlineShoppingCart />,
-        },
-        {
           name: 'pricing',
           hebrew: 'מחירונים',
           icon: <MdOutlinePriceChange />
@@ -47,6 +42,11 @@ export const links = [
           hebrew: 'ביטוחים',
           icon: <AiOutlineInsurance />
         },
+        {
+          name: 'treatments',
+          hebrew: 'טיפולים',
+          icon: <BsTools />
+        },
       ],
     },
     {
@@ -58,10 +58,20 @@ export const links = [
           icon: <RiContactsLine />,
         },
         {
-          name: 'calendar',
+          name: 'orders',
           hebrew: 'הזמנות',
-          icon: <AiOutlineCalendar />,
+          icon: <AiOutlineShoppingCart />,
         },
+        {
+          name: 'drivers',
+          hebrew: 'נהגים',
+          icon: <MdPeopleOutline />,
+        },
+        // {
+        //   name: 'calendar',
+        //   hebrew: 'הזמנות',
+        //   icon: <AiOutlineCalendar />,
+        // },
       ],  
     },
     {
@@ -71,6 +81,16 @@ export const links = [
           name: 'users',
           hebrew: 'משתמשים',
           icon: <RiAdminLine />,
+        },
+        {
+          name: 'missions',
+          hebrew: 'משימות',
+          icon: <VscChecklist />,
+        },
+        {
+          name: 'pricingManagement',
+          hebrew: 'ניהול מחירונים',
+          icon: <RiListSettingsLine />,
         },
       ],
     },

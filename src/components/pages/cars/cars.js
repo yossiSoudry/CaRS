@@ -45,7 +45,7 @@ export default function CarsTable() {
             5
           )}-${item.license_number.substring(5)}`
         : '';
-      item.last_treatment = item.last_treatment.substring(0, 10);
+      if(item.last_treatment !== null) item.last_treatment = item.last_treatment.substring(0, 10);
       item.exp_ins = item.exp_ins.substring(0, 10);
       item.date_join = item.date_join.substring(0, 10);
       item.exp_test = item.exp_test.substring(0, 10);

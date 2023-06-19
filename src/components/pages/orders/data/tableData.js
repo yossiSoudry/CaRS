@@ -12,11 +12,11 @@ export const ordersColumnsData = [
   },
   {
     title: "קטגוריה",
-    col: "badge",
+    col: "dot",
     value: ["category"],
     editable:true,
-    option: ["A", "B", "C", "D","E"],
-    colors: ["green", "purple", "red", "yellow","gray"]
+    option: ["A - מיני", "B - סופר מיני", "C - חצי משפחתי", "D - משפחתי", "E - משפחתי משודרג", "F - ג'יפון", 'G - מיני וואן', 'H - מיני וואן משודרג', 'I - וואן', 'J - מסחרי', 'K - מנהלים'],
+    colors: ["green", "emerald", "teal", "cyan","sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink"]
   },
   {
     title: "פרטי רכב",
@@ -52,7 +52,7 @@ export const ordersColumnsData = [
     editable: true,
   },
   {
-    title: "סיום ",
+    title: "סיום",
     col: "simple",
     lines: 2,
     value: ["return_date","return_time"],
@@ -64,7 +64,7 @@ export const ordersColumnsData = [
     value: ["name"],
     editable: true,
     table:'drivers',
-    inObj:'drivers',
+    inObj:'driver_names',
   },
   {
     title: "הופק ע''י",
@@ -81,7 +81,7 @@ export const ordersColumnsData = [
     value: "status",
     editable:true,
     type: "select",
-    option: ["עתידי", "מושכר", "הוחזר", "בירור","נמכר"],
+    option: ["עתידי", "השכרה", "הוחזר", "בירור","נמכר"],
     colors: ["green", "purple", "red", "yellow","gray"]
   },
   {

@@ -65,7 +65,7 @@ const Login = () => {
           </div>
           <div className='flex flex-col text-gray-400'>
             <input
-              className='rounded-xl w-full bg-secondary mt-2 p-4 focus:text-gray-300 focus:bg-zinc-900 focus:outline-none shadow-2xl'
+              className='rounded-xl select-none w-full bg-secondary mt-2 p-4 focus:text-gray-300 focus:bg-zinc-900 focus:outline-none shadow-2xl'
               type={typePassInp}
               id='password'
               value={password}

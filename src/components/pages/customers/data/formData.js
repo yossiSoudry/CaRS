@@ -1,8 +1,4 @@
-import { useState, useEffect } from 'react';
-import { apiGet } from '../../../../services/services';
 import { URL_DRIVERS } from '../../../../data/constants';
-import { Select } from 'antd';
-import { IdcardOutlined, PhoneOutlined } from '@ant-design/icons';
 import { DataList } from '../../../forms/dataList';
 
 
@@ -23,6 +19,7 @@ export const formInputsCustomer = [
     placeholder: 'מספר זהות',
     label: 'מספר זהות',
     tag: 'input',
+    required: true,
     pattern: '^[a-zA-Z0-9]+$',
     errorMessage: 'מספר זהות שגוי',
   },
@@ -31,6 +28,7 @@ export const formInputsCustomer = [
     type: 'search',
     placeholder: 'סוג מזהה',
     label: 'סוג מזהה',
+    required: true,
     tag: 'select',
     option: ['ת.ז.', 'דרכון', 'ח.פ.', 'ע.ר.'],
   },
@@ -40,6 +38,7 @@ export const formInputsCustomer = [
     placeholder: 'מדינה',
     label: 'ארץ',
     tag: 'input',
+    required: true,
     pattern: '^[a-zA-Z-\u0590-\u05FF ]+$',
     errorMessage: 'שם המדינה שגוי',
   },
@@ -49,6 +48,7 @@ export const formInputsCustomer = [
     placeholder: 'עיר',
     label: 'עיר',
     tag: 'input',
+    required: true,
     pattern: '^[a-zA-Z-\u0590-\u05FF ]+$',
     errorMessage: 'שם העיר שגוי',
   },
@@ -58,6 +58,7 @@ export const formInputsCustomer = [
     placeholder: 'כתובת',
     label: 'כתובת',
     tag: 'input',
+    required: true,
     pattern: '^[0-9a-zA-Z-\u0590-\u05FF ]+$',
     errorMessage: 'כתובת שגויה',
   },
@@ -86,17 +87,17 @@ export const formInputsCustomer = [
     placeholder: "דוא''ל",
     label: "דוא''ל",
     tag: 'input',
+    required: true,
     pattern: '^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$',
     errorMessage: 'דוא"ל שגוי',
   },
   {
     name: 'drivers',
-    type: 'search',
     placeholder: 'נהגים',
     label: 'נהגים',
     tag: 'dataList',
     data: (
-      <DataList mode='multiple' name={'drivers'} url={URL_DRIVERS} info1={['name']} info2={['זהות', 'identity']} info3={['טלפון', 'phone_number']} />
+      <DataList mode='tags' url={URL_DRIVERS} info1={['name']} info2={['identity', '']} info3={['phone_number']} name='drivers' />
     ),
   },
 ];
@@ -112,7 +113,7 @@ export const customerValues = {
   phone_number: '',
   another_phone_number: '',
   email: '',
-  drivers: [],
   images: [],
   files: [],
+  drivers: [],
 };

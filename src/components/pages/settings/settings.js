@@ -55,12 +55,8 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export default function Settings() {
-  const {
-    currentColor,
-    setCurrentColor,
-    setCurrentMode,
-    currentMode,
-  } = useStateContext();
+  const { currentColor, setCurrentColor, setCurrentMode, currentMode } =
+    useStateContext();
 
   const setMode = (e) => {
     setCurrentMode(e.target.value);
@@ -74,53 +70,107 @@ export default function Settings() {
 
   return (
     <div className="m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl dark:bg-secondary dark:text-gray-200">
-      <Box sx={{}} className="" style={{ zIndex: 0 }}>
-                  <div className="p-4 border-t-1 border-stone-200 dark:border-stone-500 ml-4">
-                    <p className="font-semibold text-xl text-center mb-8">
-                      כהה / בהיר
-                    </p>
-                    <div className="flex gap-3 justify-center">
-                      <FormControlLabel
-                        control={
-                            <MaterialUISwitch
-                              checked={currentMode === "dark" ? true : false}
-                              onChange={setMode}
-                              value={currentMode === ("dark"|| undefined) ? "light" : "dark"}
-                            />
-                        }
-                      />
-                    </div>
-                  </div>
+      {/* <div className="p-4 border-t-1 border-stone-200 dark:border-stone-500 ml-4">
+        <p className="font-semibold text-xl text-center mb-8">כהה / בהיר</p>
+        <div className="flex gap-3 justify-center">
+          <FormControlLabel
+            control={
+              <MaterialUISwitch
+                checked={currentMode === "dark" ? true : false}
+                onChange={setMode}
+                value={currentMode === ("dark" || undefined) ? "light" : "dark"}
+              />
+            }
+          />
+        </div>
+      </div> */}
 
-                  <div className="p-4 border-t-1 border-stone-200 dark:border-stone-500 ml-4">
-                    <p className="font-semibold text-xl text-center mb-8">
-                      ערכת צבעים
-                    </p>
-                    <div className="sm:flex gap-2 justify-center">
-                      {themeColors.map((item, index) => (
-                        <div
-                          className="mt-2 cursor-pointer flex gap-5 items-center"
-                          key={item.name}
-                        >
-                          <button
-                            type="button"
-                            className={`h-10 w-10 hover:ring-2 hover:ring-slate-500 rounded cursor-pointer ${
-                              item.color === currentColor ? "ring-2 ring-slate-500" : ""
-                            }`}
-                            style={{ backgroundColor: item.color }}
-                            onClick={() => setColor(item.color)}
-                          >
-                            <BsCheck
-                              className={`mr-2 text-2xl text-white ${
-                                item.color === currentColor ? "block" : "hidden"
-                              }`}
-                            />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-      </Box>
+      <div className="p-4 border-t-1 flex flex-col items-center border-stone-200 dark:border-stone-500 ml-4">
+        <p className="font-semibold text-xl text-center my-8">ערכת צבעים</p>
+        <div className="sm:flex gap-2 justify-center">
+          {themeColors.map((item, index) => (
+            <div
+              className="mt-2 cursor-pointer flex gap-5 items-center"
+              key={item.name}
+            >
+              <button
+                type="button"
+                className={`h-10 w-10 hover:ring-2 hover:ring-slate-500 rounded cursor-pointer ${
+                  item.color === currentColor ? "ring-2 ring-slate-500" : ""
+                }`}
+                style={{ backgroundColor: item.color }}
+                onClick={() => setColor(item.color)}
+              >
+                <BsCheck
+                  className={`mr-2 text-2xl text-white ${
+                    item.color === currentColor ? "block" : "hidden"
+                  }`}
+                />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="p-4 border-t-1 flex mt-10 flex-col items-center border-stone-200 dark:border-stone-500 ml-4">
+        <p className="font-semibold text-xl text-center my-8">ערכת נושא</p>
+        <FormControlLabel
+          control={
+            <MaterialUISwitch
+              checked={currentMode === "dark" ? true : false}
+              onChange={setMode}
+              value={currentMode === ("dark" || undefined) ? "light" : "dark"}
+            />
+          }
+        />
+        <div className="sm:flex mt-8 gap-4 justify-center">
+          
+          <div>
+            <div className="items-center rounded-md border-2 p-1 hover:scale-110 duration-300 border-white">
+              <div className="space-y-2 rounded-sm bg-slate-950 p-2">
+                <div className="space-y-2 rounded-md bg-slate-800 p-2 shadow-sm">
+                  <div className="h-2 w-[80px] rounded-lg bg-slate-400" />
+                  <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
+                </div>
+                <div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
+                  <div className="h-4 w-4 rounded-full bg-slate-400" />
+                  <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
+                </div>
+                <div className="flex items-center space-x-2 rounded-md bg-slate-800 p-2 shadow-sm">
+                  <div className="h-4 w-4 rounded-full bg-slate-400" />
+                  <div className="h-2 w-[100px] rounded-lg bg-slate-400" />
+                </div>
+              </div>
+            </div>
+            <span className="block w-full p-2 text-center font-normal">
+              כהה
+            </span>
+          </div>
+          <div>
+            <div className="items-center rounded-md border-2 p-1 hover:scale-110 duration-300 border-gray-700">
+              <div className="space-y-2 rounded-sm bg-[#ecedef] p-2">
+                <div className="space-y-2 rounded-md bg-white p-2 shadow-sm">
+                  <div className="h-2 w-[80px] rounded-lg bg-[#ecedef]" />
+                  <div className="h-2 w-[100px] rounded-lg bg-[#ecedef]" />
+                </div>
+                <div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
+                  <div className="h-4 w-4 rounded-full bg-[#ecedef]" />
+                  <div className="h-2 w-[100px] rounded-lg bg-[#ecedef]" />
+                </div>
+                <div className="flex items-center space-x-2 rounded-md bg-white p-2 shadow-sm">
+                  <div className="h-4 w-4 rounded-full bg-[#ecedef]" />
+                  <div className="h-2 w-[100px] rounded-lg bg-[#ecedef]" />
+                </div>
+              </div>
+            </div>
+            <span className="block w-full p-2 text-center font-normal">
+              בהיר
+            </span>
+          </div>
+        </div>
+        
+      </div>
+      <div className="p-4 border-t-1 mt-10 flex flex-col items-center border-stone-200 dark:border-stone-500 ml-4"></div>
     </div>
   );
 }

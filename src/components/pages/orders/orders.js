@@ -22,7 +22,7 @@ export default function Orders() {
     const data = await apiGet(URL_INTERACTIONS);
     setIsLoading(false);
     setOrdersData(fixData(data));
-    console.log(ordersData);
+    // console.log(ordersData);
   };
   useEffect(() => {
     getOrdersData();

@@ -2,22 +2,29 @@ import { HiEllipsisVertical } from "react-icons/hi2";
 import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 import { apiGet } from "../../services/services";
 import { useStateTableContext } from "../../contexts/tableContext";
+import { useState } from "react";
 
 function Thead({ columns, headerSticky, setData, url, fixData }) {
   const {
     pageNum,
     limitForReq,
-    reverse,
-    setReverse,
     setItems,
     highPageNum,
     setHighPageNum,
   } = useStateTableContext();
-  const search = async (title) => {
+
+  const [reverse, setReverse] = useState(false)
+  const sort = async (title) => {
     let newData = await apiGet(
-      `${url}?&sort='${title}${reverse && "&reverse=yes"}${limitForReq !== 0 && '&limit=' + limitForReq}
+      `${url}?&sort=${title}${reverse ? "&reverse=yes" : ""}${
+        limitForReq !== 0 && "&limit=" + limitForReq
+      }
       `
     );
+    console.log(`${url}?&sort=${title}${reverse ? "&reverse=yes" : ""}${
+      limitForReq !== 0 && "&limit=" + limitForReq
+    }
+    `);
     // Corrects the data
     newData = fixData(newData);
     // for pagination
@@ -41,19 +48,23 @@ function Thead({ columns, headerSticky, setData, url, fixData }) {
           >
             <div className="flex items-center gap-2">
               {column.title}
-              {reverse?<BsArrowDown
-                className="hidden group-hover:block dark:hover:bg-neutral-600 hover:bg-white rounded-full"
-                onClick={() => {
-                  search(column.title);
-                  setReverse(!reverse)
-                }}
-              />:<BsArrowUp
-              className="hidden group-hover:block dark:hover:bg-neutral-600 hover:bg-white rounded-full"
-              onClick={() => {
-                search(column.value[0]);
-                setReverse(!reverse)
-              }}
-            />}
+              {reverse ? (
+                <BsArrowDown
+                  className="hidden group-hover:block dark:hover:bg-neutral-600 hover:bg-white rounded-full"
+                  onClick={() => {
+                    sort(column.value[0]);
+                    setReverse(!reverse);
+                  }}
+                />
+              ) : (
+                <BsArrowUp
+                  className="hidden group-hover:block dark:hover:bg-neutral-600 hover:bg-white rounded-full"
+                  onClick={() => {
+                    sort(column.value[0]);
+                    setReverse(!reverse);
+                  }}
+                />
+              )}
               <HiEllipsisVertical className="hidden group-hover:block dark:hover:bg-neutral-600 hover:bg-white rounded-full" />
             </div>
           </th>

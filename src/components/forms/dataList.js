@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { apiGet } from '../../services/services';
 import { Select } from 'antd';
-import { IdcardOutlined, PhoneOutlined } from '@ant-design/icons';
 import { useStateTableContext } from '../../contexts/tableContext';
 
 export const DataList = ({ url, info1, info2, info3, mode, name, ...inputProps  }) => {
-  console.log(name);
+  // console.log(name);
   const [optionsData, setOptionsData] = useState([]);
   const { values,setValues} = useStateTableContext();
   const updateValue = async (value) => {
-    const objectValue = await apiGet(url  + "/single/" + value);
+    const objectValue = await apiGet(url  + "/single/" + (typeof(value) === 'object'? value[value.length -1]: value));
     setValues({ ...values, [name]: objectValue });
+    console.log(values)
   };
 
   const fixUndefined = (value) => {
@@ -20,10 +20,10 @@ export const DataList = ({ url, info1, info2, info3, mode, name, ...inputProps  
   useEffect(() => {
     const fetchData = async () => {
       const data = await apiGet(url);
-      console.log(data);
+      // console.log(data);
       const options = data.map((option) => ({
         value: option._id,
-        label: `${option[info1]} | ${option[info2[0]]} ${fixUndefined(option[info2[1]])} | ${option[info3[0]]}`,
+        label: `${option[info1]} | ${option[info2[0]]} ${fixUndefined(option[info2[1]])} | ${fixUndefined(option[info3[0]])}`,
       }));
       setOptionsData(options);
     };

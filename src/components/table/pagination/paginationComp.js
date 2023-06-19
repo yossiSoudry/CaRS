@@ -1,21 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { apiGet } from '../../../services/services';
-import { URL } from '../../../data/constants';
-import { useStateContext } from '../../../contexts/contextProvider';
-import { useStateTableContext } from '../../../contexts/tableContext';
-import { Divider, Tooltip } from 'antd';
-import { BsArrowDown, BsArrowUp } from 'react-icons/bs';
-import { MdOutlineSkipNext, MdOutlineSkipPrevious } from 'react-icons/md';
-import { SlRefresh } from 'react-icons/sl';
+import React, { useEffect, useState } from "react";
+import { apiGet } from "../../../services/services";
+import { URL } from "../../../data/constants";
+import { useStateContext } from "../../../contexts/contextProvider";
+import { useStateTableContext } from "../../../contexts/tableContext";
+import { Divider, Tooltip } from "antd";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
+import { MdOutlineSkipNext, MdOutlineSkipPrevious } from "react-icons/md";
+import { SlRefresh } from "react-icons/sl";
 
-export default function Pagination({
-  url,
-  rows
-}) {
+export default function Pagination({ url, rows }) {
   // Contexts
-  const {  pageNum,  setPageNum, limitForReq, setLimitForReq, items, setItems, reverse, setReverse, highPageNum, setHighPageNum } = useStateTableContext();
-  const { currentColor, refresh, setRefresh } = useStateContext();
-  
+  const {
+    pageNum,
+    setPageNum,
+    limitForReq,
+    setLimitForReq,
+    items,
+    setItems,
+    reverse,
+    setReverse,
+    highPageNum,
+    setHighPageNum,
+  } = useStateTableContext();
+  const { currentColor, refresh, setRefresh, screenSize } = useStateContext();
+
   // Get the length of data
   let length = rows.length;
 
@@ -34,98 +42,113 @@ export default function Pagination({
 
   return (
     <>
-      <div className='flex flex-wrap items-center pr-6 text-neutral-500 dark:text-neutral-400 text-lg'>
-        <div className=' flex items-center hover:text-sky-300 dark:hover:text-sky-200 rounded-lg'>
-          <Tooltip placement='top' title='רענן'>
-            <SlRefresh className='w-5 h-5 hover:text-sky-300 dark:hover:text-sky-200 duration-200 cursor-pointer' onClick={()=> setRefresh(! refresh)} />
+      <div className="flex flex-wrap items-center select-none cursor-default pr-6 text-neutral-500 dark:text-neutral-400 text-lg">
+        <div className=" flex items-center hover:text-sky-300 dark:hover:text-sky-200 rounded-lg">
+          <Tooltip placement="top" title="רענן">
+            <SlRefresh
+              className="w-5 h-5 hover:text-sky-300 dark:hover:text-sky-200 duration-200 cursor-pointer"
+              onClick={() => setRefresh(!refresh)}
+            />
           </Tooltip>
         </div>
-        <Divider type='vertical' className='h-5' />
-        <div className={`border flex items-center border-gray-200 dark:border-gray-700 shadow p-2 rounded-lg`}>
-          <Tooltip placement='top' title='מההתחלה לסוף'>
+        <Divider type="vertical" className="h-5" />
+        <div
+          className={`border flex items-center border-gray-200 dark:border-gray-700 shadow p-2 rounded-lg`}
+        >
+          <Tooltip placement="top" title="מההתחלה לסוף">
             <span
-              className='w-5 h-5 text-lg hover:text-sky-300 dark:hover:text-sky-200 duration-200 cursor-pointer'
+              className="w-5 h-5 flex items-center text-lg hover:text-sky-300 dark:hover:text-sky-200 duration-200 cursor-pointer"
               onClick={() => setReverse(!reverse)}
             >
               <BsArrowDown style={!reverse ? { color: currentColor } : {}} />
             </span>
           </Tooltip>
-          <Tooltip placement='top' title='מהסוף להתחלה'>
+          <Tooltip placement="top" title="מהסוף להתחלה">
             <span
-              className='w-5 h-5 text-lg hover:text-sky-300 dark:hover:text-sky-200 duration-200 cursor-pointer'
+              className="w-5 h-5 flex items-center text-lg hover:text-sky-300 dark:hover:text-sky-200 duration-200 cursor-pointer"
               onClick={() => setReverse(!reverse)}
             >
               <BsArrowUp style={reverse ? { color: currentColor } : {}} />
             </span>
           </Tooltip>
         </div>
-        <Divider type='vertical' className='h-5' />
-        <div className={`border flex items-center border-gray-200 dark:border-gray-700 shadow p-1 rounded-lg`}>
-          <Tooltip placement='top' title='הקודם'>
+        <Divider type="vertical" className="h-5" />
+        <div
+          className={`border flex items-center border-gray-200 dark:border-gray-700 shadow p-1 rounded-lg`}
+        >
+          <Tooltip placement="top" title="הקודם">
             <button
               onClick={() => {
                 setPageNum(Math.max(pageNum - 1, 1));
               }}
+              className=" flex items-center"
             >
               {
                 <MdOutlineSkipNext
                   className={`text-2xl mt-0.5 ${
                     pageNum === 1
-                      ? 'text-neutral-300 dark:text-neutral-500'
-                      : 'text-neutral-500 dark:text-neutral-100 hover:text-sky-300 dark:hover:text-sky-200 pt-0.5'
+                      ? "text-neutral-300 dark:text-neutral-500"
+                      : "text-neutral-500 dark:text-neutral-100 hover:text-sky-300 dark:hover:text-sky-200"
                   }`}
                 />
               }
             </button>
           </Tooltip>
-          <div className='px-2 flex gap-2'>
-            דף
+          <div className="px-2 flex gap-2">
+            גיליון
             <span style={{ color: currentColor }}>{pageNum}</span>
             מתוך
             <span style={{ color: currentColor }}>{highPageNum}</span>
           </div>
-          <Tooltip placement='top' title='הבא'>
+          <Tooltip placement="top" title="הבא">
             <button
               onClick={() => {
                 setPageNum(Math.min(pageNum + 1, highPageNum));
               }}
+              className=" flex items-center"
             >
               {
                 <MdOutlineSkipPrevious
                   className={`text-2xl mt-0.5 ${
                     pageNum === highPageNum
-                      ? 'text-neutral-300 dark:text-neutral-500'
-                      : 'text-neutral-500 dark:text-neutral-100 hover:text-sky-300 dark:hover:text-sky-200 pt-0.5'
+                      ? "text-neutral-300 dark:text-neutral-500"
+                      : "text-neutral-500 dark:text-neutral-100 hover:text-sky-300 dark:hover:text-sky-200"
                   }`}
                 />
               }
             </button>
           </Tooltip>
         </div>
-        <Divider type='vertical' className='h-5' />
-        <div className='border flex border-gray-200 dark:border-gray-700 shadow p-1 rounded-lg'>
-          {' '}
-          {' מציג'}
-          <input
-            min={1}
-            className='bg-inherit text-center w-10 mr-2'
-            type='number'
-            placeholder={limitForReq}
-            defaultValue={limitForReq}
-            onChange={(e) => {
-              setLimitForReq(e.target.value);
-              localStorage.limitForReq = e.target.value;
-            }}
-            style={{ color: currentColor }}
-          />
-          <span className='ml-3'>{'תצאות בדף,'}</span>
-          {'מ -'}
-          <div className='flex gap-3 pr-1'>
-            <span style={{ color: currentColor }}>{(pageNum - 1) * length + 1}</span>
-            {'עד'} <span style={{ color: currentColor }}>{Math.min(pageNum * length, items)}</span>
-            {'מתוך'} <span style={{ color: currentColor }}>{items}</span>
+        <Divider type="vertical" className="h-5" />
+        {screenSize > 480 && (
+          <div className="border flex border-gray-200 dark:border-gray-700 shadow p-1 rounded-lg">
+            מציג עד
+            <input
+              min={1}
+              className="bg-inherit text-center w-10 mr-2"
+              type="number"
+              placeholder={limitForReq}
+              defaultValue={limitForReq}
+              onChange={(e) => {
+                setLimitForReq(e.target.value);
+                localStorage.limitForReq = e.target.value;
+              }}
+              style={{ color: currentColor }}
+            />
+            <span className="ml-3">{"תצאות בגיליון,"}</span>
+            {"מ -"}
+            <div className="flex gap-3 pr-1">
+              <span style={{ color: currentColor }}>
+                {(pageNum - 1) * length + 1}
+              </span>
+              {"עד"}{" "}
+              <span style={{ color: currentColor }}>
+                {Math.min(pageNum * length, items)}
+              </span>
+              {"מתוך"} <span style={{ color: currentColor }}>{items}</span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

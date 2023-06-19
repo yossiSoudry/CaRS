@@ -7,7 +7,7 @@ export const formInputsOrder = [
     type: "search",
     label: "סוג",
     tag: "select",
-    option: ["השכרה", "הזמנה"],
+    option: ["השכרה", "עתידי"],
     required: true,
   },
   {

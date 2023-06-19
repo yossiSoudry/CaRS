@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiGet, apiPatch, apiPut } from '../../../services/services';
-import { URL_ALL_WORKERS, URL_WORKER_ID } from '../../../data/constants';
+import { URL_WORKERS, URL_WORKER_ID } from '../../../data/constants';
 import { useStateContext } from '../../../contexts/contextProvider';
 import { userObjDateSearch, userObjSearch, usersColumnsData } from './data/tableData';
 import Table from '../../table/table';
@@ -16,9 +16,8 @@ export default function Users() {
   // Get the users data
   const getUserData = async () => {
     setIsLoading(true);
-    const data = await apiGet(URL_ALL_WORKERS + "?limit=" + localStorage.limitForReq);
+    const data = await apiGet(URL_WORKERS + "?limit=" + localStorage.limitForReq);
     setIsLoading(false);
-    console.log(data);
     setUsersData(fixData(data));
   };
   useEffect(() => {
@@ -41,6 +40,7 @@ export default function Users() {
     };
     const id = row._id;
     delete row._id;
+    delete row.id;
     delete row.role;
     delete row.__v;
     delete row.date_join;

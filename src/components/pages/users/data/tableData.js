@@ -1,6 +1,5 @@
 export const usersColumnsData = [
   {
-    id: 1,
     title: "שם",
     col: "main",
     lines: 2,
@@ -9,7 +8,6 @@ export const usersColumnsData = [
     type: "text",
   },
   {
-    id: 2,
     title: "תפקיד",
     col: "titles",
     lines: 1,
@@ -18,7 +16,6 @@ export const usersColumnsData = [
     type: ["text", "text"],
   },
   {
-    id: 3,
     title: "פרטים",
     col: "links",
     lines: 2,
@@ -27,7 +24,13 @@ export const usersColumnsData = [
     type: ["email", "phone"],
   },
   {
-    id: 4,
+    title: " תאריך רישום",
+    col: "simple",
+    lines: 2,
+    value: ["date_join"],
+    editable: false,
+  },
+  {
     title: "הרשאה",
     col: "badge",
     value: "role",
@@ -37,7 +40,6 @@ export const usersColumnsData = [
     colors: ["green", "lime", "red", "yellow"]
   },
   {
-    id: 6,
     title: "פעולות",
     col: "actions",
     files: true,

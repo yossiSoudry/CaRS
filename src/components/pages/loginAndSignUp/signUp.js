@@ -4,7 +4,7 @@ import { MdEmail, MdLocationOn } from 'react-icons/md';
 import { FaUser } from 'react-icons/fa';
 import { apiPost } from '../../../services/services';
 import { useStateContext } from '../../../contexts/contextProvider';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { URL_WORKERS } from '../../../data/constants';
 const Signup = ({ setIsRegistered }) => {
   const { currentColor } = useStateContext();
@@ -12,34 +12,40 @@ const Signup = ({ setIsRegistered }) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
   const [phone_number, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [user_name, setUserName] = useState('');
   const [typePassInp, setTypePassInp] = useState('password');
   const [err, setErr] = useState('');
 
-  const nav = useNavigate();
+  // const nav = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (password !== password2) {
+      console.log(password);
+      console.log(password2);
+      return;
+    }
     let name = firstName + ' ' + lastName;
     try {
       let resp = await apiPost(URL_WORKERS, { name, email, password, phone_number, user_name, address });
-      // console.log(resp);(resp);
       if (resp._id) {
-        return nav('/login');
-      } else if (resp.code === 11000) {
+        setIsRegistered(true)
+      }
+    } catch (err) {
+      console.log(err)
+      if(err.response.data.code === 11000) {
         setErr('משתמש רשום! הנך מועבר לדף התחברות.');
         setTimeout(() => {
-          nav('/login');
-        }, 5 * 1000);
+          alert("פרטיך נקלטו בהצלחה ולאחר אישור מנהל תוכל להתחבר")
+          setIsRegistered(true)
+        }, 2 * 1000);
+      }else{
+        setErr('חסר פרטים או שאחד מהפרטים שהוזנו אינו תקין');
       }
-      // else{
-      //   setErr("חסר פרטים או שאחד מהפרטים שהוזנו אינו תקין")
-      // }
-    } catch (err) {
-      setErr('חסר פרטים או שאחד מהפרטים שהוזנו אינו תקין');
-      // console.log(resp);(err)
+      
     }
   };
 
@@ -51,7 +57,7 @@ const Signup = ({ setIsRegistered }) => {
       >
         <h2 className='text-4xl text-white font-bold text-center mb-6'>SignUp </h2>
         <p className='text-yellow-300 text-center text-xs hover:scale-125 duration-500'>יש למלא את כל השדות!</p>
-        <div className='flex flex-col text-gray-400 py-2'>
+        <div className='flex flex-col text-gray-400 py-1'>
           <div className='flex'>
             <input
               className='rounded-xl w-1/2 bg-secondary mt-2 p-3 focus:text-gray-300 focus:bg-zinc-900 focus:outline-none shadow-2xl'
@@ -71,7 +77,7 @@ const Signup = ({ setIsRegistered }) => {
             />
           </div>
         </div>
-        <div className='flex flex-col text-gray-400 py-2'>
+        <div className='flex flex-col text-gray-400 py-1'>
           <input
             className='rounded-xl w-full bg-secondary mt-2 p-3 focus:text-gray-300 focus:bg-zinc-900 focus:outline-none shadow-2xl'
             placeholder="דוא''ל"
@@ -92,7 +98,7 @@ const Signup = ({ setIsRegistered }) => {
             <MdEmail className='text-2xl text-gray-500' />
           </div>
         </div>
-        <div className='flex flex-col text-gray-400 py-2'>
+        <div className='flex flex-col text-gray-400 py-1'>
           <input
             className='rounded-xl w-full bg-secondary mt-2 p-3 focus:text-gray-300 focus:bg-zinc-900 focus:outline-none shadow-2xl'
             placeholder='כתובת'
@@ -113,7 +119,7 @@ const Signup = ({ setIsRegistered }) => {
             <MdLocationOn className='text-2xl text-gray-500' />
           </div>
         </div>
-        <div className='flex flex-col text-gray-400 py-2'>
+        <div className='flex flex-col text-gray-400 py-1'>
           <input
             className='rounded-xl w-full bg-secondary mt-2 p-3 focus:text-gray-300 focus:bg-zinc-900 focus:outline-none shadow-2xl'
             placeholder='טלפון'
@@ -134,7 +140,7 @@ const Signup = ({ setIsRegistered }) => {
             <BsTelephoneFill className='text-xl text-gray-500' />
           </div>
         </div>
-        <div className='flex flex-col text-gray-400 py-2'>
+        <div className='flex flex-col text-gray-400 py-1'>
           <input
             className='rounded-xl w-full bg-secondary mt-2 p-3 focus:text-gray-300 focus:bg-zinc-900 focus:outline-none shadow-2xl'
             placeholder='שם משתמש'
@@ -155,7 +161,8 @@ const Signup = ({ setIsRegistered }) => {
             <FaUser className='text-xl text-gray-500' />
           </div>
         </div>
-        <div className='flex flex-col text-gray-400 py-2'>
+        <div className='flex'>
+        <div className='flex flex-col text-gray-400 py-1'>
           <input
             className='rounded-xl w-full bg-secondary mt-2 p-3 focus:text-gray-300 focus:bg-zinc-900 focus:outline-none shadow-2xl'
             placeholder='סיסמה'
@@ -190,14 +197,16 @@ const Signup = ({ setIsRegistered }) => {
             )}
           </div>
         </div>
-        <div className='flex flex-col text-gray-400 py-2'>
+        <div className='flex flex-col text-gray-400 py-1'>
           <input
             className='rounded-xl w-full bg-secondary mt-2 p-3 focus:text-gray-300 focus:bg-zinc-900 focus:outline-none shadow-2xl'
             placeholder='אימות סיסמה'
             type={typePassInp}
             id='password2'
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            
+            onChange={(e) => {e.target.value !== password ? setErr('הססמאות אינם תואמות!'):setErr('') 
+             setPassword2(e.target.value)}}
+            // onfocusout={}
           />
           <div
             className='mr-auto h-0 relative'
@@ -225,6 +234,7 @@ const Signup = ({ setIsRegistered }) => {
             )}
           </div>
         </div>
+        </div>
         <small className='text-red-700'>{err}</small>
         <div className='flex justify-between text-gray-400 p-3'>
           <p className='flex items-center'>
@@ -235,7 +245,7 @@ const Signup = ({ setIsRegistered }) => {
           </p>
         </div>
         <button
-          className='w-full my-2 mt-6 py-2 text-3xl shadow-lg shadow-teal-500/10 hover:shadow-teal-500/30 text-white font-semibold rounded-lg'
+          className='w-full my-2 mt-6 py-1 text-3xl shadow-lg shadow-teal-500/10 hover:shadow-teal-500/30 text-white font-semibold rounded-lg'
           type='submit'
           style={{ backgroundColor: currentColor }}
           onClick={handleSubmit}

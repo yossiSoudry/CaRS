@@ -1,11 +1,13 @@
 import { Fragment } from "react";
-import { Modal, Tooltip } from "antd";
+import { Modal, Popconfirm, Tooltip } from "antd";
 import { ModalTable } from "./modalTable";
 import Files from "../files/files";
 import GetSingle from "./getSingle";
 import Location from "./location/location";
 import { useStateContext } from "../../contexts/contextProvider";
 import { useStateTableContext } from "../../contexts/tableContext";
+import { apiDelete, loadingMsg } from "../../services/services";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 function RowGrid({
   i,
@@ -41,7 +43,7 @@ function RowGrid({
       return `/images/${column.value[0]}/${row[column.value[1][0]]}.png`;
     } else return `/images/${column.value[0]}/default.png`;
   };
-  const { currentMode } = useStateContext();
+  const { currentMode, refresh, setRefresh } = useStateContext();
 
   return (
     <tr
@@ -135,12 +137,7 @@ function RowGrid({
                     row[column.value[0]] = e.currentTarget.textContent;
                   }}
                 >
-                  {row[column.inObj]
-                    ? row[column.inObj][column.value[0]]
-                    : row[column.inArr]
-                    ? `${row[column.inArr].length}`
-                    : row[column.value[0]]}{" "}
-                  {/* {row[column.inObj] ? row[column.inArr] ? row[column.inObj][1][column.value[0]] : row[column.inObj][column.value[1]] : row[column.value[1]]} */}
+                  {row[column.value[0]]}
                 </div>
                 {column.lines === 2 && (
                   <div
@@ -202,8 +199,9 @@ function RowGrid({
                 <div className="flex ">
                   <div className="block">
                     <div className="text-sm text-gray-900 whitespace-nowrap dark:text-white">
-                    {row[column.inObj][column.value[0]]}{" "}
-                        {row[column.inObj][column.value[1]]}
+                      {row[column.inObj] && row[column.inObj][column.value[0]]
+                        ? row[column.inObj][column.value[0]]
+                        : column.defaultValue}
                     </div>
                     {column.lines === 2 && (
                       <div className="text-sm text-gray-900 whitespace-nowrap dark:text-white">
@@ -297,11 +295,50 @@ function RowGrid({
                 </div>
               </td>
             )}
+            {column.col === "select" && (
+              <td
+                className={`px-6 whitespace-nowrap py-${space}`}
+              >
+                {edit ? (
+                  <select
+                    onBlur={(e) => {
+                      row[column.value] = e.currentTarget.value;
+                    }}
+                    defaultValue={row[column.value]}
+                    className='text-sm text-gray-900 dark:text-white whitespace-nowrap bg-inherit rounded-md border border-gray-500'
+                    onChange={(e) => {
+                      const selectedIndex = column.option.indexOf(
+                        e.target.value
+                      );
+                    }}
+                  >
+                    <option className="d-none"></option>
+                    {column.option.map((val, i) => {
+                      return (
+                        <option
+                          key={i}
+                          className={`hover:border-collapse text-gray-700`}
+                          value={val}
+                        >
+                          {val}
+                        </option>
+                      );
+                    })}
+                  </select>
+                ) : (
+                  <div
+                    className='text-sm text-gray-900 whitespace-nowrap dark:text-white'
+                  >
+                    {row[column.value]}
+                  </div>
+                )}
+              </td>
+            )}
             {column.col === "badge" && (
               <td
                 className={`px-6 whitespace-nowrap py-${space} ${
                   stickyLeft > 1
-                    ? " sticky left-[80px] bg-white dark:bg-secondary group-hover:bg-zinc-100 dark:group-hover:bg-gray-700 duration-100"
+                    ? " sticky left-[100px] bg-white dark:bg-secondary group-hover:bg-zinc-100 dark:group-hover:bg-gray-700 duration-100"
                     : ""
                 }`}
               >
@@ -349,11 +386,62 @@ function RowGrid({
                 )}
               </td>
             )}
+            {column.col === "dot" && (
+              <td className={`px-6 whitespace-nowrap py-${space}`}>
+                {edit ? (
+                  <select
+                    onBlur={(e) => {
+                      row[column.value] = e.currentTarget.value;
+                    }}
+                    defaultValue={row[column.value]}
+                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-${
+                      column.colors[column.option.indexOf(row[column.value])]
+                    }-300 text-gray-700`}
+                    onChange={(e) => {
+                      const selectedIndex = column.option.indexOf(
+                        e.target.value
+                      );
+                      const selectedColor = column.colors[selectedIndex];
+                      e.target.classList.remove(
+                        ...column.colors.map((color) => `bg-${color}-300`)
+                      );
+                      e.target.classList.add(`bg-${selectedColor}-300`);
+                    }}
+                  >
+                    <option className="d-none"></option>
+                    {column.option.map((val, i) => {
+                      return (
+                        <option
+                          key={i}
+                          className={`hover:border-collapse bg-${column.colors[i]}-300 text-gray-700`}
+                          value={val}
+                        >
+                          {val}
+                        </option>
+                      );
+                    })}
+                  </select>
+                ) : (
+                  <div className="flex gap-2">
+                    <div
+                      className={`px-1.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-${
+                        column.colors[column.option.indexOf(row[column.value])]
+                      }-300 text-gray-700`}
+                    >
+                      {row[column.value].substring(0, 1)}
+                    </div>
+                    <div className="text-gray-900 text-sm whitespace-nowrap dark:text-white">
+                      {row[column.value].substring(3).toUpperCase()}
+                    </div>
+                  </div>
+                )}
+              </td>
+            )}
             {column.col === "actions" && (
               <td
                 className={`px-6 py-${space} ${
                   stickyLeft > 0
-                    ? " sticky left-0 bg-white dark:bg-secondary group-hover:bg-zinc-100 dark:group-hover:bg-gray-700 duration-100"
+                    ? " sticky left-0 min-w-[100px] bg-white dark:bg-secondary whitespace-nowrap group-hover:bg-zinc-100 dark:group-hover:bg-gray-700 duration-100"
                     : ""
                 }`}
               >
@@ -417,8 +505,31 @@ function RowGrid({
                               currentMode === "dark" ? "dark" : "light"
                             }
                           >
-                            <Location plate='8760981' />
+                            <Location plate={row.license_number} />
                           </Modal>
+                        </Tooltip>
+                      )}
+                      {column.delete && (
+                        <Tooltip placement="top" title="מחיקה">
+                          <Popconfirm
+                            title="מחק משימה"
+                            description="משימה זו תמחק לצמיתות. האם הנך בטוח?"
+                            onConfirm={() => {
+                              loadingMsg("נשלחה בקשת מחיקה", "blue", "info");
+                              apiDelete(column.url + row._id);
+                              setRefresh(!refresh);
+                            }}
+                            onCancel={() =>
+                              loadingMsg("מחיקה בוטלה", "blue", "info")
+                            }
+                            okText="כן"
+                            cancelText="לא"
+                          >
+                            <RiDeleteBinLine
+                              className="  hover:scale-125 text-xl duration-300 cursor-pointer"
+                              style={{ color: currentColor }}
+                            />
+                          </Popconfirm>
                         </Tooltip>
                       )}
                     </>
@@ -427,8 +538,8 @@ function RowGrid({
               </td>
             )}
             {column.col === "calc-date" && (
-              <td className={`px-6 py-${space} text-right text-sm font-medium`}>
-                <div className="">
+              <td className={`px-6 py-${space} whitespace-nowrap `}>
+                <div className="text-sm text-gray-900 dark:text-white">
                   <div
                     contentEditable={column.editable && edit}
                     suppressContentEditableWarning={true}

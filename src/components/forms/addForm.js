@@ -20,6 +20,7 @@ const AddForm = ({ title, FormFunc, formInputs, url, cleanValues, setOpenForm })
 
   const updateValue = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+    console.log(values);
   };
   // const updateFile = (e) => {
   //   setValues({ ...values, [e.target.name]: e.target.value });
@@ -82,7 +83,6 @@ const AddForm = ({ title, FormFunc, formInputs, url, cleanValues, setOpenForm })
                 apiPost(url, values);
                 setValues(cleanValues)
                 setOpenForm(false)
-                console.log(values);
               }}
               icon={<FaRegSave />}
               classN='mt-2 group-invalid:pointer-events-none group-invalid:opacity-30'

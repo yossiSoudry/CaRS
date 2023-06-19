@@ -98,18 +98,15 @@ export const pricingColumnsData = [
       editable: false,
       type: "date",
     },
-    {
-      title: "פעולות",
-      col: "actions",
-      value: "",
-      editable: false,
-      type: "text",
-    },
   ];
   
   export const userObjSearch = [
     ["category", "קטגוריה"],
     ["daily", "מחיר יומי"],
   ];
+
+  // export const dataToSelect = [
+  //   'מחירון 1 מ-01/05/2023 עד-01/06/2023'
+  // ]
   
   export const pricingObjDateSearch = [["date_added", "תאריך הקמה"]];

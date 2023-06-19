@@ -20,9 +20,6 @@ function CardGrid({
   filesModal,
   setFilesModal,
   updateOne,
-  stickyRight,
-  stickyLeft,
-  TfiLocationPin,
 }) {
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -73,7 +70,7 @@ function CardGrid({
                         {row[column.value[1][1]]}
                       </div>
                       {column.lines === 2 && (
-                        <div className="text-sm text-start text-gray-500 dark:text-gray-400">
+                        <div className="text-sm text-start text-gray-500 text-md dark:text-neutral-400">
                           {row[column.value[2][0]]}
                           {"  "}
                           {row[column.value[2][1]]}
@@ -96,7 +93,7 @@ function CardGrid({
                         {row[column.value[0]]}
                       </div>
                       {column.lines === 2 && (
-                        <div className="text-md text-gray-500 whitespace-nowrap dark:text-gray-400">
+                        <div className="text-md text-gray-500 whitespace-nowrap dark:text-neutral-400">
                           {column.title}: {"   "}
                           <span
                             contentEditable={column.editable && edit}
@@ -115,13 +112,13 @@ function CardGrid({
                   )}
                   {column.col === "simple" && (
                     <div
-                      className={`text-md py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-gray-200`}
+                      className={`text-md py-0.5 text-start flex gap-2 pr-4 text-neutral-500 whitespace-nowrap dark:text-neutral-200`}
                     >
-                      {column.title}: {"   "}
+                      {column.title}:
                       <span
                         contentEditable={column.editable === true && edit}
                         suppressContentEditableWarning={true}
-                        className="font-semibold dark:text-gray-400"
+                        className="font-semibold dark:text-neutral-400"
                         onBlur={(e) => {
                           row[column.value[0]] = e.currentTarget.textContent;
                         }}
@@ -136,7 +133,7 @@ function CardGrid({
                         <span
                           contentEditable={column.editable === true && edit}
                           suppressContentEditableWarning={true}
-                          className="font-semibold"
+                          className="font-semibold dark:text-neutral-400"
                           onBlur={(e) => {
                             row[column.value[1]] = e.currentTarget.textContent;
                           }}
@@ -147,11 +144,11 @@ function CardGrid({
                     </div>
                   )}
                   {column.col === "getSingle" && (
-                    <div className={`text-md py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-gray-200`}>
+                    <div className={`text-md py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-neutral-200`}>
                       <div className="flex">
                       {column.title}: {"   "}
                         <div>
-                          <div className="font-semibold dark:text-gray-400 pr-1">
+                          <div className="font-semibold dark:text-neutral-400 pr-1">
                             <GetSingle
                               column={column}
                               item={row[column.value[0]]}
@@ -163,7 +160,7 @@ function CardGrid({
                     </div>
                   )}
                   {column.col === "getSingleArray" && (
-                    <div className={`text-md py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-gray-200`}>
+                    <div className={`text-md py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-neutral-200`}>
                       <div className="flex">
                       {column.title}: {"   "}
                         <div>
@@ -188,11 +185,11 @@ function CardGrid({
                     </div>
                   )}
                   {column.col === "simpleObj" && (
-                    <div className={`text-md flex py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-gray-200`}>
+                    <div className={`text-md flex py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-neutral-200`}>
                       {column.title}: {"   "}
-                      <div className="font-semibold dark:text-gray-400 pr-1">
-                        {row[column.inObj][column.value[0]]}{" "}
-                        {row[column.inObj][column.value[1]]}
+                      <div className="font-semibold dark:text-neutral-400 pr-1">
+                        {row[column.inObj] && row[column.inObj][column.value[0]]}{" "}
+                        {row[column.inObj] && row[column.inObj][column.value[1]]}
                       </div>
                       {/* {column.lines === 2 && (
                         <div className="text-sm text-gray-900 whitespace-nowrap dark:text-white">
@@ -212,9 +209,9 @@ function CardGrid({
                     </div>
                   )}
                   {column.col === "arrayObj" && (
-                    <div className={`text-md flex py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-gray-200`}>
+                    <div className={`text-md flex py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-neutral-200`}>
                        {column.title}: {"   "}
-                      <div className="font-semibold dark:text-gray-400 pr-1">
+                      <div className="font-semibold flex gap-3 dark:text-neutral-400 pr-1">
                         {row[column.inObj].map((item, i) => {
                           return (
                             <Fragment key={i}>
@@ -252,7 +249,7 @@ function CardGrid({
                     </div>
                   )}
                   {column.col === "links" && (
-                    <div className={`text-md py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-gray-200`}>
+                    <div className={`text-md py-0.5 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-neutral-200`}>
                       {column.title}: {"   "}
                       <a
                         href={`${column.title.includes('mail')&& 'mailto'}: ${row[column.value[0]]}`}
@@ -265,7 +262,7 @@ function CardGrid({
                       {'     '}
                       <a
                         href={`tel:${row[column.value[1]]}`}
-                        className="text-sm text-gray-500 hover:underline dark:text-gray-400"
+                        className="text-sm text-gray-500 hover:underline dark:text-neutral-400"
                         contentEditable={column.editable && edit}
                         suppressContentEditableWarning={true}
                       >
@@ -377,12 +374,12 @@ function CardGrid({
                 )}
                 {column.col === "calc-date" && (
                   <div
-                    className={`text-md py-1 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-gray-200`}
+                    className={`text-md py-1 text-start pr-4 text-gray-500 whitespace-nowrap dark:text-neutral-200`}
                   >
                     <div className="flex items-center gap-1.5">
                       {`${column.title}: `}
                       <div
-                        className="font-semibold dark:text-gray-400"
+                        className="font-semibold dark:text-neutral-400"
                         contentEditable={column.editable && edit}
                         suppressContentEditableWarning={true}
                         onBlur={(e) => {

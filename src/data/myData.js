@@ -1,6 +1,5 @@
 import { CgProfile } from 'react-icons/cg';
-import { GoMailRead } from 'react-icons/go';
-import { FaTasks } from 'react-icons/fa';
+import { VscChecklist } from 'react-icons/vsc';
 import elazar from './images/try/elazar.png';
 import yossi from "./images/try/yossi.jpeg";
 import ofer from "./images/try/ofer.jpeg";
@@ -23,7 +22,7 @@ import ofer from "./images/try/ofer.jpeg";
 // ]
 
 // export const carObjDateSearch = [
-//   ["last_treatment", "טיפןל אחרון"],
+//   ["last_treatment", "טיפול אחרון"],
 //   ["date_join", "תאריך הצטרפות"],
 //   ["exp_test", "תאריך טסט אחרון"],
 //   ["date_next_treatment", "תאריך הטיפול הבא"],
@@ -98,6 +97,16 @@ export const userProfileData = [
     onClick:'user',
     dataToRender:['name','user_name','company_role','email','address','phone_number','date_join'],
     textToRender:['שם','שם משתמש','תפקיד','מייל','כתובת','טלפון','תאריך הצטרפות']
+  },
+  {
+    icon: <VscChecklist />,
+    title: 'משימות',
+    desc: 'משימות & פגישות',
+    iconColor: '#03C9D7',
+    iconBg: '#E5FAFB',
+    onClick:'mission',
+    dataToRender:['Date_added','title','time_to_do','mission','remarks','importance'],
+    textToRender:['נוספה בתאריך','כותרת','זמן לביצוע','משימה','דגשים','דחיפות']
   },
   ]
 
