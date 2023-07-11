@@ -12,21 +12,9 @@ body {
   direction: rtl;
 }
 
-/* @media only screen and (max-width: 600px) {
-  body > div:nth-child(3)
-  , body > div:nth-child(4)
-  , body > div:nth-child(5)
-{
+body > div:has(> img) {
   display: none !important;
 }
-}
-@media (min-width: 600px) {
-body > div:nth-child(4)
-, body > div:nth-child(5)
-{
-  display: none !important;
-}
-} */
 
 @tailwind base;
 @tailwind components;
@@ -61,7 +49,7 @@ body > div:nth-child(4)
   font-size: medium;
   top: 6px;
 } */
-.css-dev-only-do-not-override-htwhyh .ant-btn-primary{
+.css-dev-only-do-not-override-htwhyh .ant-btn-primary {
   background-color: var(--current-color) !important;
 }
 .ant-modal-content {
@@ -86,7 +74,7 @@ body > div:nth-child(4)
 .anticon-close {
   color: var(--current-color) !important;
 }
-input[type="number"]::-webkit-inner-spin-button{
+input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
